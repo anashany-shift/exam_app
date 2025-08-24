@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/Login_view_body.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
@@ -7,7 +9,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-     
+      body: LoginViewBody(),
     );
   }
 }
