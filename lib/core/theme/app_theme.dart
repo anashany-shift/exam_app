@@ -1,56 +1,75 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:exam_app/core/utils/app_colors.dart';
 
-import '../utils/app_colors.dart';
+import 'package:flutter/material.dart';
 
 abstract class AppTheme {
-  static final ColorScheme _colorScheme = ColorScheme(
+  static ThemeData _getTheme({
+    required ColorScheme colorScheme,
+    required Color textFieldBorderColor,
+  }) {
+    return ThemeData(
+      colorScheme: colorScheme,
+      appBarTheme: AppBarTheme(
+        foregroundColor: colorScheme.secondary,
+        centerTitle: false,
+        elevation: 0,
+        titleSpacing: 0,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        height: 60,
+        indicatorColor: AppColors.blue[10],
+        backgroundColor: AppColors.lightBlue,
+      ),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(fontSize: 16, color: colorScheme.secondary),
+        bodyMedium: TextStyle(fontSize: 14, color: colorScheme.secondary),
+        bodySmall: TextStyle(fontSize: 12, color: colorScheme.secondary),
+        titleLarge: TextStyle(fontSize: 20, color: colorScheme.secondary , fontWeight: FontWeight.w600),
+        titleMedium: TextStyle(fontSize: 18, color: colorScheme.secondary),
+        titleSmall: TextStyle(
+          fontSize: 16,
+          color: colorScheme.secondary,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
 
-     onBackground: AppColors.white,
-      background: AppColors.white,
+      inputDecorationTheme: InputDecorationTheme(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: textFieldBorderColor, width: 1),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: textFieldBorderColor, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: textFieldBorderColor, width: 1),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: colorScheme.error, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: colorScheme.error, width: 1),
+        ),
+      ),
+    );
+  }
 
+  static ThemeData lightTheme = _getTheme(
+    colorScheme: const ColorScheme(
       brightness: Brightness.light,
-      primary: AppColors.blueShades[50]!,
-      onPrimary: AppColors.lightBlue,
-      secondary: AppColors.green,
+      primary: AppColors.blue,
+      onPrimary: AppColors.white,
+      secondary: AppColors.black,
       onSecondary: AppColors.white,
       error: AppColors.red,
-      onError: AppColors.lightRed,
-      surface: AppColors.blackShades[50]!,
-      onSurface: AppColors.grey
-  );
-
-
-
-
-
-  static ThemeData lightTheme=ThemeData(
-    colorScheme: _colorScheme,
-    scaffoldBackgroundColor: Colors.white,
-    textTheme:  TextTheme(
-      
-     
-        bodyLarge: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w500,
-            color: AppColors.blackShades[50]),
-        bodyMedium: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: AppColors.blackShades[50]),
-        bodySmall: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w400,
-            color: AppColors.grey),
-        titleLarge: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w500,
-            color: AppColors.blackShades[50])),
-      
-    
-
-
-
-
+      onError: AppColors.white,
+      surface: AppColors.white,
+      onSurface: AppColors.blue,
+    ),
+    textFieldBorderColor: AppColors.grey,
   );
 }

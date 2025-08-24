@@ -17,16 +17,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-          minTextAdapt: true,
+      minTextAdapt: true,
       splitScreenMode: true,
-      builder:(context, child) {
-       return MaterialApp(
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: AppTheme.lightTheme,
         onGenerateRoute: AppRoutes.generateRoute,
-        initialRoute:Routes.login ,
-        );
-      } ,
-    );  
-    
-  }}
+        initialRoute: Routes.login,
+      ),
+    );
+  }
+}
