@@ -1,10 +1,10 @@
 
-import 'package:exam_app/presentation/features/auth/login/view/widgets/login_view.dart';
-import 'package:exam_app/presentation/features/auth/sign_up/view/widgets/sign_up_view.dart';
-import 'package:exam_app/presentation/features/exam/view/widgets/exam_view.dart';
+import 'package:exam_app/presentation/features/auth/login/view/login_view.dart';
+import 'package:exam_app/presentation/features/auth/sign_up/view/sign_up_view.dart';
+import 'package:exam_app/presentation/features/exam/view/exam_view.dart';
 import 'package:exam_app/presentation/features/main_layout/main_layout_view.dart' ;
-import 'package:exam_app/presentation/features/subject/view/widgets/subject_view.dart';
-import 'package:exam_app/presentation/features/subject_details/view/widgets/subject_details_view.dart';
+import 'package:exam_app/presentation/features/subject/view/subject_view.dart';
+import 'package:exam_app/presentation/features/subject_details/view/subject_details_view.dart';
 import 'package:flutter/material.dart';
 
 import 'routes.dart';
