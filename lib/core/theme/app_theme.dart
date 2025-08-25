@@ -1,11 +1,13 @@
 import 'package:exam_app/core/utils/app_colors.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppTheme {
   static ThemeData _getTheme({
     required ColorScheme colorScheme,
     required Color textFieldBorderColor,
+    required Color elevatedBorderSideColor,
   }) {
     return ThemeData(
       colorScheme: colorScheme,
@@ -21,13 +23,17 @@ abstract class AppTheme {
         backgroundColor: AppColors.lightBlue,
       ),
       textTheme: TextTheme(
-        bodyLarge: TextStyle(fontSize: 16, color: colorScheme.secondary),
-        bodyMedium: TextStyle(fontSize: 14, color: colorScheme.secondary),
-        bodySmall: TextStyle(fontSize: 12, color: colorScheme.secondary),
-        titleLarge: TextStyle(fontSize: 20, color: colorScheme.secondary , fontWeight: FontWeight.w600),
-        titleMedium: TextStyle(fontSize: 18, color: colorScheme.secondary),
+        bodyLarge: TextStyle(fontSize: 16.sp, color: colorScheme.secondary),
+        bodyMedium: TextStyle(fontSize: 14.sp, color: colorScheme.secondary),
+        bodySmall: TextStyle(fontSize: 12.sp, color: colorScheme.secondary),
+        titleLarge: TextStyle(
+          fontSize: 20.sp,
+          color: colorScheme.secondary,
+          fontWeight: FontWeight.w600,
+        ),
+        titleMedium: TextStyle(fontSize: 18.sp, color: colorScheme.secondary),
         titleSmall: TextStyle(
-          fontSize: 16,
+          fontSize: 16.sp,
           color: colorScheme.secondary,
           fontWeight: FontWeight.w400,
         ),
@@ -55,6 +61,18 @@ abstract class AppTheme {
           borderSide: BorderSide(color: colorScheme.error, width: 1),
         ),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          foregroundColor: colorScheme.primary,
+          backgroundColor: colorScheme.primary,
+          shape: RoundedRectangleBorder(
+            side:BorderSide.none ,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 14.h),
+        ),
+      ),
     );
   }
 
@@ -71,5 +89,6 @@ abstract class AppTheme {
       onSurface: AppColors.blue,
     ),
     textFieldBorderColor: AppColors.grey,
+    elevatedBorderSideColor: AppColors.blue,
   );
 }

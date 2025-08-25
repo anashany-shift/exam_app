@@ -33,7 +33,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               Text('Login', style: theme.textTheme.titleLarge),
               SizedBox(height: 24.h),
 
-
               CustomTextFormField(
                 textFormFieldModel: TextFormFieldModel(
                   label: "Email",
@@ -42,7 +41,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 ),
               ),
               SizedBox(height: 24.h),
-              
 
               CustomTextFormField(
                 textFormFieldModel: TextFormFieldModel(
@@ -67,7 +65,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       (route) => false,
                     );
                   },
-                  height: 48.h,
                 ),
               ),
               SizedBox(height: 16.h),
@@ -91,6 +88,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   ),
                 ],
               ),
+
+
+
             ],
           ),
         ),

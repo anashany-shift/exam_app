@@ -11,19 +11,22 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme=Theme.of(context);
     return SizedBox(
-      height:( buttonModel.height ?? 55).h,
+      height:( buttonModel.height ?? 48).h,
       width:( buttonModel.width ?? double.infinity).w,
-      child: MaterialButton(
-        onPressed: buttonModel.onPressed,
-        color: buttonModel.backgroundColor ?? Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(buttonModel.borderRadius),
-          side: BorderSide(
-            color: buttonModel.backgroundColor != null
-                ? const Color(0xff022D82)
-                : Colors.transparent,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: buttonModel.backgroundColor ,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(buttonModel.borderRadius),
+            side: BorderSide(
+              color: buttonModel.backgroundColor != null
+                  ? const Color(0xff022D82)
+                  : Colors.transparent,
+            ),
           ),
         ),
+        onPressed: buttonModel.onPressed,
+
         child: Text(
           buttonModel.text,
           style:
