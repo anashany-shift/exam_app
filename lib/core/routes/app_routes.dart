@@ -1,4 +1,5 @@
 
+import 'package:exam_app/presentation/features/auth/forget_password/view/forget_password_view.dart';
 import 'package:exam_app/presentation/features/auth/login/view/login_view.dart';
 import 'package:exam_app/presentation/features/auth/sign_up/view/sign_up_view.dart';
 import 'package:exam_app/presentation/features/exam/view/exam_view.dart';
@@ -17,7 +18,7 @@ abstract class AppRoutes {
       case Routes.signUp:
         return MaterialPageRoute(builder: (_) => SignUpView());
       case Routes.forgetPassword:
-        return MaterialPageRoute(builder: (_) => const Scaffold());
+        return MaterialPageRoute(builder: (_) => ForgetPasswordView());
       case Routes.mainLayout:
         return MaterialPageRoute(builder: (_) => MainLayoutView());
       case Routes.subject:

@@ -28,7 +28,7 @@ class _RemeberAndForgetSectionState extends State<RemeberAndForgetSection> {
           },
         ),
         Text('Remember me', style: theme.textTheme.bodyMedium),
-        Expanded(child: SizedBox()),
+       const Expanded(child: SizedBox()),
 
         InkWell(
           onTap: () {

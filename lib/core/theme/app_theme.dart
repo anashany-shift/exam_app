@@ -11,6 +11,10 @@ abstract class AppTheme {
   }) {
     return ThemeData(
       colorScheme: colorScheme,
+
+      iconTheme: IconThemeData(
+        color: colorScheme.secondary
+      ),
       appBarTheme: AppBarTheme(
         foregroundColor: colorScheme.secondary,
         centerTitle: false,

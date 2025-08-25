@@ -52,8 +52,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ),
 
               SizedBox(height: 16.h),
-              RemeberAndForgetSection(),
+
+            const  RemeberAndForgetSection(),
               SizedBox(height: 48.h),
+
 
               CustomButton(
                 buttonModel: ButtonModel(
