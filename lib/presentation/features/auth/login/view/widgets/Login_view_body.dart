@@ -23,77 +23,78 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Login', style: theme.textTheme.titleLarge),
-              SizedBox(height: 24.h),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Login', style: theme.textTheme.titleLarge),
+                SizedBox(height: 24.h),
 
-              CustomTextFormField(
-                textFormFieldModel: TextFormFieldModel(
-                  label: "Email",
-                  hint: "Enter your email",
-                  validator: Validation.validateEmail,
-                ),
-              ),
-              SizedBox(height: 24.h),
-
-              CustomTextFormField(
-                textFormFieldModel: TextFormFieldModel(
-                  validator: Validation.validatePassword,
-                  label: "password",
-                  hint: "Enter your password",
-                  obscureText: true,
-                ),
-              ),
-
-              SizedBox(height: 16.h),
-
-            const  RemeberAndForgetSection(),
-              SizedBox(height: 48.h),
-
-
-              CustomButton(
-                buttonModel: ButtonModel(
-                  text: "Login",
-                  onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      Routes.mainLayout,
-                      (route) => false,
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: 16.h),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account? ",
-                    style: theme.textTheme.bodyLarge,
+                CustomTextFormField(
+                  textFormFieldModel: TextFormFieldModel(
+                    label: "Email",
+                    hint: "Enter your email",
+                    validator: Validation.validateEmail,
                   ),
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, Routes.signUp),
-                    child: Text(
-                      'Sign up ',
-                      style: theme.textTheme.bodyLarge!.copyWith(
-                        color: theme.primaryColor,
-                        decoration: TextDecoration.underline,
+                ),
+                SizedBox(height: 24.h),
+
+                CustomTextFormField(
+                  textFormFieldModel: TextFormFieldModel(
+                    validator: Validation.validatePassword,
+                    label: "password",
+                    hint: "Enter your password",
+                    obscureText: true,
+                  ),
+                ),
+
+                SizedBox(height: 16.h),
+
+              const  RemeberAndForgetSection(),
+                SizedBox(height: 48.h),
+
+
+                CustomButton(
+                  buttonModel: ButtonModel(
+                    text: "Login",
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.mainLayout,
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 16.h),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account? ",
+                      style: theme.textTheme.bodyLarge,
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, Routes.signUp),
+                      child: Text(
+                        'Sign up ',
+                        style: theme.textTheme.bodyLarge!.copyWith(
+                          color: theme.primaryColor,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
 
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
