@@ -33,5 +33,14 @@ static String? validateText(String? value){
 
     return null;
   }
+  static String? validatePin(String? value) {
+  if (value == null || value.isEmpty) {
+    return "Code is required";
+  }
+  if (value != "1234") {
+    return "Invalid Code";
+  }
+  return null;
+}
 }
 

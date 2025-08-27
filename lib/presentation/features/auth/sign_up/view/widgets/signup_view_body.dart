@@ -111,7 +111,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               SizedBox(height: 48.h),
               CustomButton(
                 buttonModel: ButtonModel(
-                  text: 'Signup',
+                  text: 'Sign up',
         
                    onPressed: (){},
                    
