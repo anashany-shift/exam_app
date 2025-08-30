@@ -58,7 +58,8 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Expanded(
+          Flexible(
+            fit: FlexFit.loose,
             child: PageView(
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),

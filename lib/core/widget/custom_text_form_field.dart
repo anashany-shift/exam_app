@@ -10,6 +10,8 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return TextFormField(
+
+
       autovalidateMode:AutovalidateMode.onUserInteraction ,
       onChanged: textFormFieldModel.onChanged,
       validator:textFormFieldModel.validator,
@@ -21,11 +23,15 @@ class CustomTextFormField extends StatelessWidget {
         hintText: textFormFieldModel.hint,
         hintStyle: theme.textTheme.bodyMedium,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        errorBorder: OutlineInputBorder(),
-        enabledBorder: OutlineInputBorder(),
-        border: OutlineInputBorder(),
-        disabledBorder: OutlineInputBorder(),
-        focusedBorder: OutlineInputBorder(),
+        suffixIcon: textFormFieldModel.suffixIcon,
+
+        errorBorder:  OutlineInputBorder(
+          borderRadius:BorderRadius.circular(textFormFieldModel.border??8),
+        ),
+        enabledBorder:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
+        border:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
+        disabledBorder:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
+        focusedBorder:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
       ),
     );
   }
