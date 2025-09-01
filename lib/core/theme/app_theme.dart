@@ -84,6 +84,7 @@ abstract class AppTheme {
           padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 14.h),
         ),
       ),
+
     );
   }
 

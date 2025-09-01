@@ -10,11 +10,11 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return TextFormField(
+      controller: textFormFieldModel.controller,
 
-
-      autovalidateMode:AutovalidateMode.onUserInteraction ,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: textFormFieldModel.onChanged,
-      validator:textFormFieldModel.validator,
+      validator: textFormFieldModel.validator,
       obscureText: textFormFieldModel.obscureText,
       keyboardType: textFormFieldModel.keyboardType,
       decoration: InputDecoration(
@@ -24,17 +24,25 @@ class CustomTextFormField extends StatelessWidget {
         hintStyle: theme.textTheme.bodyMedium,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: textFormFieldModel.suffixIcon,
+        suffix:textFormFieldModel.suffix,
 
-        errorBorder:  OutlineInputBorder(
-          borderRadius:BorderRadius.circular(textFormFieldModel.border??8),
+
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
         ),
-        enabledBorder:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
-        border:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
-        disabledBorder:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
-        focusedBorder:  OutlineInputBorder( borderRadius:BorderRadius.circular(textFormFieldModel.border??8),),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
       ),
     );
   }
 }
-
-

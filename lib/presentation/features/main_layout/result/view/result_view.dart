@@ -1,10 +1,29 @@
+import 'package:exam_app/presentation/features/subject/view/widgets/subject_exam_info_section.dart';
+import 'package:exam_app/presentation/features/subject/view/widgets/subject_exam_info_section_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResultView extends StatelessWidget {
   const ResultView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.yellowAccent);
+    var theme=Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Result",
+          style: theme.textTheme.titleLarge!.copyWith(
+            color: theme.colorScheme.primary,
+          ),
+        ),
+        SizedBox(height: 40.h,),
+
+        Expanded(child: SubjectExamInfoSectionListView()),
+
+
+      ],
+    );
   }
 }
