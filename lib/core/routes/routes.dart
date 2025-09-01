@@ -6,5 +6,6 @@ abstract class Routes {
   static const String subject = '/subject';
   static const String subjectDetails = '/subjectDetails';
   static const String exam = '/exam';
+  static const String resetPassword = '/resetPassword';
 
 }

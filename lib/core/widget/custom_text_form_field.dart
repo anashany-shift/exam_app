@@ -10,9 +10,11 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return TextFormField(
-      autovalidateMode:AutovalidateMode.onUserInteraction ,
+      controller: textFormFieldModel.controller,
+
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: textFormFieldModel.onChanged,
-      validator:textFormFieldModel.validator,
+      validator: textFormFieldModel.validator,
       obscureText: textFormFieldModel.obscureText,
       keyboardType: textFormFieldModel.keyboardType,
       decoration: InputDecoration(
@@ -21,14 +23,26 @@ class CustomTextFormField extends StatelessWidget {
         hintText: textFormFieldModel.hint,
         hintStyle: theme.textTheme.bodyMedium,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        errorBorder: OutlineInputBorder(),
-        enabledBorder: OutlineInputBorder(),
-        border: OutlineInputBorder(),
-        disabledBorder: OutlineInputBorder(),
-        focusedBorder: OutlineInputBorder(),
+        suffixIcon: textFormFieldModel.suffixIcon,
+        suffix:textFormFieldModel.suffix,
+
+
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFormFieldModel.border ?? 5),
+        ),
       ),
     );
   }
 }
-
-

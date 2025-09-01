@@ -42,6 +42,13 @@ abstract class AppTheme {
           fontWeight: FontWeight.w400,
         ),
       ),
+      cardTheme: CardThemeData(
+        elevation: 3,
+        color: colorScheme.onPrimary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(10),
+        )
+      ),
 
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: OutlineInputBorder(
@@ -77,6 +84,7 @@ abstract class AppTheme {
           padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 14.h),
         ),
       ),
+
     );
   }
 
