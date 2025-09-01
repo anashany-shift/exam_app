@@ -1,5 +1,4 @@
-import 'package:exam_app/presentation/features/subject/view/widgets/subject_exam_info_section.dart';
-import 'package:exam_app/presentation/features/subject/view/widgets/subject_exam_info_section_list_view.dart';
+import 'package:exam_app/presentation/features/main_layout/result/view/widgets/result_exam_info_section_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +19,7 @@ class ResultView extends StatelessWidget {
         ),
         SizedBox(height: 40.h,),
 
-        Expanded(child: SubjectExamInfoSectionListView()),
+        const Expanded(child:ResultExamInfoSectionListView()),
 
 
       ],

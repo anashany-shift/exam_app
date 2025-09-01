@@ -1,10 +1,10 @@
+import 'package:exam_app/core/utils/app_assets.dart';
 import 'package:exam_app/core/utils/app_colors.dart';
 import 'package:exam_app/presentation/features/main_layout/profile/view/profile_view.dart';
 import 'package:exam_app/presentation/features/main_layout/result/view/result_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../gen/assets.gen.dart';
 import 'explore/view/explore_view.dart';
 
 class MainLayoutView extends StatefulWidget {
@@ -59,15 +59,15 @@ class _MainLayoutViewState extends State<MainLayoutView> {
         onDestinationSelected: onDestinationSelected,
         destinations: <Widget>[
           NavigationDestination(
-            icon: SvgPicture.asset(Assets.icons.home),
+            icon: SvgPicture.asset(AppAssets.iconHome),
             label: 'Explore',
           ),
           NavigationDestination(
-            icon: SvgPicture.asset(Assets.icons.result),
+            icon: SvgPicture.asset(AppAssets.iconResult),
             label: 'Result',
           ),
           NavigationDestination(
-            icon: SvgPicture.asset(Assets.icons.profile),
+            icon: SvgPicture.asset(AppAssets.iconProfile)  ,
             label: 'Profile',
           ),
         ],

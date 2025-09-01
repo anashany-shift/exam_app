@@ -36,7 +36,6 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
         curve: Curves.easeInOut,
       );
     }
-    print(selectedIndex);
   }
 
   void perviousPage() {

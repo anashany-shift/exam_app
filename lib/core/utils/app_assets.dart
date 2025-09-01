@@ -7,6 +7,9 @@ abstract class AppAssets{
   static const String colorPalete="assets/images/ColorPalette.png";
   static const String photo="assets/images/Photo.png";
   static const String camera="assets/images/camera.png";
+  static const String iconHome="assets/icons/home.svg";
+  static const String iconProfile="assets/icons/profile.svg";
+  static const String iconResult="assets/icons/result.svg";
 
 
 

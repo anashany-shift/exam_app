@@ -1,12 +1,13 @@
 import 'package:exam_app/core/routes/routes.dart';
+import 'package:exam_app/core/utils/app_assets.dart' show AppAssets;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_assets.dart';
-import '../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/utils/app_colors.dart';
 
-class SubjectExamInfoCardItem extends StatelessWidget {
-  const SubjectExamInfoCardItem({
+
+class ResultExamInfoCardItem extends StatelessWidget {
+  const ResultExamInfoCardItem({
     super.key,
   });
 
@@ -47,20 +48,18 @@ class SubjectExamInfoCardItem extends StatelessWidget {
                         color: AppColors.grey,
                       ),
                     ),
-                    SizedBox(height: 8.h),
+                    SizedBox(height: 10.h),
                     Text(
-                      "18 corrected answers in 25 min. ",
-                      style: theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary)
+                      "18 corrected answers in 25 min.",
+                      style: theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary),
                     ),
                   ],
                 ),
               ),
               Text(
                 "30 minutes",
-                style: theme.textTheme.bodySmall!.copyWith(
-                  color: theme.colorScheme.primary,
-                ),
-              ),
+                style: theme.textTheme.bodySmall ),
+              
             ],
           ),
         ),
