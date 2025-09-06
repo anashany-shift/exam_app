@@ -1,3 +1,4 @@
+import 'package:exam_app/presentation/features/exam/view/widgets/exam_view_body.dart';
 import 'package:flutter/material.dart';
 
 class ExamView extends StatelessWidget {
@@ -6,6 +7,7 @@ class ExamView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+     body:  SafeArea(child: ExamViewBody())
      
     );
   }

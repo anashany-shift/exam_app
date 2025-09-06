@@ -19,9 +19,8 @@ class ResultExamInfoCardItem extends StatelessWidget {
     return Card(
 
       child: InkWell(
-        onTap: () async{
-          if (!context.mounted) return;
-          await Navigator.pushNamed(context, Routes.subjectDetails);
+        onTap: () {
+           Navigator.pushNamed(context, Routes.answer);
 
         },
         child: Padding(
