@@ -17,25 +17,25 @@ abstract class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.login:
-        return MaterialPageRoute(builder: (_) =>  LoginView());
+        return MaterialPageRoute(builder: (_) =>  const LoginView());
       case Routes.signUp:
-        return MaterialPageRoute(builder: (_) =>  SignUpView());
+        return MaterialPageRoute(builder: (_) =>  const SignUpView());
       case Routes.forgetPassword:
-        return MaterialPageRoute(builder: (_) =>  ForgetPasswordView());
+        return MaterialPageRoute(builder: (_) =>  const ForgetPasswordView());
       case Routes.mainLayout:
-        return MaterialPageRoute(builder: (_) =>  MainLayoutView());
+        return MaterialPageRoute(builder: (_) =>  const MainLayoutView());
       case Routes.subject:
-        return MaterialPageRoute(builder: (_) => SubjectView ());
+        return MaterialPageRoute(builder: (_) => const SubjectView ());
       case Routes.subjectDetails:
-        return MaterialPageRoute(builder: (_) =>  SubjectDetailsView());
+        return MaterialPageRoute(builder: (_) =>  const SubjectDetailsView());
         case Routes.exam:
-        return MaterialPageRoute(builder: (_) =>  ExamView());
+        return MaterialPageRoute(builder: (_) =>  const ExamView());
       case Routes.resetPassword:
-        return MaterialPageRoute(builder: (_) =>  ResetPasswordView());
+        return MaterialPageRoute(builder: (_) =>  const ResetPasswordView());
         case Routes.answer:
-        return MaterialPageRoute(builder: (_) =>  AnswerView());
+        return MaterialPageRoute(builder: (_) =>  const AnswerView());
         case Routes.examScore:
-        return MaterialPageRoute(builder: (_) =>  ExamScoreView());
+        return MaterialPageRoute(builder: (_) =>  const ExamScoreView());
 
 
       // Define your routes here
