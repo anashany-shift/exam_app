@@ -18,7 +18,8 @@ class LoginViewBody extends StatefulWidget {
 
 final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-class _LoginViewBodyState extends State<LoginViewBody> {
+class _LoginViewBodyState extends State<LoginViewBody>   {
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -54,15 +55,14 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
                 SizedBox(height: 16.h),
 
-              const  RemeberAndForgetSection(),
+                const RemeberAndForgetSection(),
                 SizedBox(height: 48.h),
-
 
                 CustomButton(
                   buttonModel: ButtonModel(
                     text: "Login",
                     onPressed: () {
-                      Navigator.pushNamed(
+                      Navigator.pushReplacementNamed(
                         context,
                         Routes.mainLayout,
                       );
@@ -79,7 +79,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       style: theme.textTheme.bodyLarge,
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, Routes.signUp),
+                      onTap: () => Navigator.pushReplacementNamed(
+                        context,
+                        Routes.signUp,
+                      ),
                       child: Text(
                         'Sign up ',
                         style: theme.textTheme.bodyLarge!.copyWith(
@@ -90,9 +93,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     ),
                   ],
                 ),
-
-
-
               ],
             ),
           ),

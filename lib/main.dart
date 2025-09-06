@@ -5,8 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/routes/routes.dart';
 import 'core/theme/app_theme.dart';
 
+
+final RouteObserver<ModalRoute<void>> routeObserver =
+RouteObserver<ModalRoute<void>>();
 void main() {
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Exam',
         theme: AppTheme.lightTheme,
+        navigatorObservers: [routeObserver],
         onGenerateRoute: AppRoutes.generateRoute,
         initialRoute: Routes.login,
       ),

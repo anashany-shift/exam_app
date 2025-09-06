@@ -128,7 +128,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                       style: theme.textTheme.bodyLarge,
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, Routes.login),
+                      onTap: () => Navigator.pushReplacementNamed(context, Routes.login),
                       child: Text(
                         'Login',
                         style: theme.textTheme.bodyLarge!.copyWith(

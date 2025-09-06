@@ -7,6 +7,7 @@ class SubjectExamInfoListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: 3,
       itemBuilder: (context, index) {
