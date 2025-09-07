@@ -8,8 +8,8 @@ import '../../feature/exam/exam_soccer/view/exam_score_view.dart';
 import '../../feature/exam/view/exam_view.dart';
 import '../../feature/main_layout/main_layout_view.dart';
 import '../../feature/reset_password/view/reset_password_view.dart';
-import '../../feature/subject/subject_details/view/subject_details_view.dart';
 import '../../feature/subject/view/subject_view.dart';
+import '../../feature/subject_details/view/subject_details_view.dart';
 import 'routes.dart';
 
 abstract class AppRoutes {
