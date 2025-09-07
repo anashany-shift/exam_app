@@ -2,7 +2,7 @@ import 'package:exam_app/core/models/button_model.dart';
 import 'package:exam_app/core/routes/routes.dart';
 import 'package:exam_app/core/utils/app_colors.dart';
 import 'package:exam_app/core/widget/custom_button.dart';
-import 'package:exam_app/presentation/features/subject_details/view/widgets/subject_details_exam_info.dart';
+import 'package:exam_app/feature/subject/subject_details/view/widgets/subject_details_exam_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
