@@ -15,3 +15,7 @@ final class LoginError extends LoginState {
 
   LoginError( this.errorMessage);
 }
+LoginState getsate(){
+  return LoginLoading();
+}
+

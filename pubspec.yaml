@@ -46,6 +46,8 @@ dependencies:
     # add injectable to your dependencies
   injectable:
   get_it:
+  pretty_dio_logger: ^1.4.0
+  flutter_secure_storage: ^9.2.4
 
 
   flutter_countdown_timer: ^4.1.0

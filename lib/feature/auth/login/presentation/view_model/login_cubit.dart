@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:exam_app/feature/auth/login/data/model/login_response.dart';
+import 'package:exam_app/core/config/api_result.dart';
 import 'package:exam_app/feature/auth/login/domain/entities/login_entity.dart';
 import 'package:exam_app/feature/auth/login/domain/useCases/login_use_case.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
     : super(LoginInitial());
 
   Future<void> login() async {
+  
     emit(LoginLoading());
 
     try {
@@ -29,10 +30,20 @@ class LoginCubit extends Cubit<LoginState> {
           password: passwordController.text,
         )
       );
-      result.fold(
-        (failure) => emit(LoginError(failure.errorMessage)),
-        (loginEntity) => emit(LoginSuccess(loginEntity:loginEntity )),
-      );
+    
+       switch (result) {
+      case ApiSuccessResult<LoginEntity>():
+        emit(LoginSuccess(loginEntity: result.data));
+        break;
+
+      case ApiErrorResult<LoginEntity> ():
+        emit(LoginError(result.errorMessage));
+        break;
+
+      default:
+        emit(LoginError("Unexpected error"));
+        break;
+    }
     } on Exception catch (e) {
       emit(LoginError(e.toString()));
     }

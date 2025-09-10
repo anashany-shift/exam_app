@@ -7,20 +7,17 @@ import '../../../../../../core/routes/routes.dart';
 import '../../view_model/login_cubit.dart';
 
 class LoginListener extends StatelessWidget {
-  const LoginListener({
-    super.key, required this.widget,
-
-  });
+  const LoginListener({super.key, required this.widget});
 
   final Widget widget;
 
-
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit,LoginState>(
-        listener: (context, state) {
-          if (state is LoginSuccess) {
-            Navigator.of(context).pop(); // Close loading dialog
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        switch (state) {
+          case LoginSuccess():
+            Navigator.of(context).pop();
             showTopSnackBar(
               Overlay.of(context),
               const CustomSnackBar.success(message: "Login successful!"),
@@ -28,9 +25,13 @@ class LoginListener extends StatelessWidget {
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.mainLayout,
-                  (route) => false,
+              (route) => false,
             );
-          } else if (state is LoginLoading) {
+            break;
+
+          case LoginInitial():
+            throw UnimplementedError();
+          case LoginLoading():
             showDialog(
               context: context,
               builder: (context) {
@@ -41,17 +42,35 @@ class LoginListener extends StatelessWidget {
                 );
               },
             );
-          } else if (state is LoginError) {
+          case LoginError():
             Navigator.of(context).pop(); // Close loading dialog
             showTopSnackBar(
               Overlay.of(context),
               CustomSnackBar.error(message: state.errorMessage),
             );
             print(state.errorMessage);
-          }
-        },
+        }
+      },
 
-        child:widget
+      child: widget,
     );
   }
 }
+
+
+//  if (state is LoginSuccess) {
+//             Navigator.of(context).pop(); // Close loading dialog
+//             showTopSnackBar(
+//               Overlay.of(context),
+//               const CustomSnackBar.success(message: "Login successful!"),
+//             );
+//             Navigator.pushNamedAndRemoveUntil(
+//               context,
+//               Routes.mainLayout,
+//                   (route) => false,
+//             );
+//           } else if (state is LoginLoading) {
+           
+//           } else if (state is LoginError) {
+           
+//           }

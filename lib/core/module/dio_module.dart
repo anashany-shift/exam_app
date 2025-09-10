@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/constants/api_constant.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/web.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../helper/token_storage.dart';
 
 @module
 abstract class DioModule {
@@ -15,8 +16,7 @@ abstract class DioModule {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final prefs = await SharedPreferences.getInstance();
-          final token = prefs.getString("token");
+           final token = await TokenStorage.getToken();
 
           if (token != null && token.isNotEmpty) {
             options.headers['token'] = token;
@@ -27,18 +27,25 @@ abstract class DioModule {
     
       ),
     );
-     dio.interceptors.add(
-      LogInterceptor(
-        request: true,
+     dio.interceptors.add(PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
-        responseHeader: false,
         responseBody: true,
+        responseHeader: false,
         error: true,
-        logPrint: (object) => Logger().i(object),
-      ),
+        compact: true,
+        maxWidth: 90,
+        
+        filter: (options, args){
+            // don't print requests with uris containing '/posts' 
+            if(options.path.contains('/posts')){
+              return false;
+            }
+            // don't print responses with unit8 list data
+            return !args.isResponse || !args.hasUint8ListData;
+          }
+      )
     );
-
     return dio;
   }
 }
