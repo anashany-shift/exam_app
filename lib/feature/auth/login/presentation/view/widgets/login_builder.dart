@@ -1,34 +1,33 @@
-import 'package:exam_app/core/helper/validation.dart';
-import 'package:exam_app/core/routes/routes.dart';
-import 'package:exam_app/core/widget/custom_button.dart';
-import 'package:exam_app/core/widget/custom_text_form_field.dart';
-import 'package:exam_app/feature/auth/login/view/widgets/remember_forget_section.dart';
+import 'package:exam_app/feature/auth/login/presentation/view/widgets/remember_forget_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/helper/validation.dart';
 import '../../../../../../core/models/button_model.dart';
 import '../../../../../../core/models/text_field_model.dart';
+import '../../../../../../core/routes/routes.dart';
+import '../../../../../../core/widget/custom_button.dart';
+import '../../../../../../core/widget/custom_text_form_field.dart';
+import '../../view_model/login_cubit.dart';
 
-class LoginViewBody extends StatefulWidget {
-  const LoginViewBody({super.key});
+class LoginBuilder extends StatelessWidget {
+  const LoginBuilder({
+    super.key,
+  });
 
-  @override
-  State<LoginViewBody> createState() => _LoginViewBodyState();
-}
-
-final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-class _LoginViewBodyState extends State<LoginViewBody>   {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LoginCubit>();
     var theme = Theme.of(context);
+
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
-            key: formKey,
+            key: cubit.formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -37,6 +36,7 @@ class _LoginViewBodyState extends State<LoginViewBody>   {
 
                 CustomTextFormField(
                   textFormFieldModel: TextFormFieldModel(
+                    controller: cubit.emailController,
                     label: "Email",
                     hint: "Enter your email",
                     validator: Validation.validateEmail,
@@ -46,6 +46,7 @@ class _LoginViewBodyState extends State<LoginViewBody>   {
 
                 CustomTextFormField(
                   textFormFieldModel: TextFormFieldModel(
+                    controller: cubit.passwordController,
                     validator: Validation.validatePassword,
                     label: "password",
                     hint: "Enter your password",
@@ -62,10 +63,7 @@ class _LoginViewBodyState extends State<LoginViewBody>   {
                   buttonModel: ButtonModel(
                     text: "Login",
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        Routes.mainLayout,
-                      );
+                      cubit.loginValidate(formKey: cubit.formKey);
                     },
                   ),
                 ),

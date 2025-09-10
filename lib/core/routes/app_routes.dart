@@ -1,8 +1,11 @@
+import 'package:exam_app/core/config/di.dart';
+import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart' show LoginCubit;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../feature/answer/view/answer_view.dart';
 import '../../feature/auth/forget_password/view/forget_password_view.dart';
-import '../../feature/auth/login/view/login_view.dart';
+import '../../feature/auth/login/presentation/view/login_view.dart';
 import '../../feature/auth/sign_up/view/sign_up_view.dart';
 import '../../feature/exam/exam_soccer/view/exam_score_view.dart';
 import '../../feature/exam/view/exam_view.dart';
@@ -16,7 +19,10 @@ abstract class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.login:
-        return MaterialPageRoute(builder: (_) => const LoginView());
+        return MaterialPageRoute(builder: (_) =>  BlocProvider<LoginCubit>(
+                  create: (context) => getIt.get<LoginCubit>(),
+                  child: const LoginView(),
+                ));
       case Routes.signUp:
         return MaterialPageRoute(builder: (_) => const SignUpView());
       case Routes.forgetPassword:

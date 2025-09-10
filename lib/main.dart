@@ -2,6 +2,7 @@ import 'package:exam_app/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/config/di.dart';
 import 'core/routes/routes.dart';
 import 'core/theme/app_theme.dart';
 
@@ -9,6 +10,7 @@ import 'core/theme/app_theme.dart';
 final RouteObserver<ModalRoute<void>> routeObserver =
 RouteObserver<ModalRoute<void>>();
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 
 }
