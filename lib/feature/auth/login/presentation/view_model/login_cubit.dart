@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:exam_app/core/config/api_result.dart';
+import 'package:exam_app/core/helper/token_storage.dart';
 import 'package:exam_app/feature/auth/login/domain/entities/login_entity.dart';
 import 'package:exam_app/feature/auth/login/domain/useCases/login_use_case.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,10 @@ class LoginCubit extends Cubit<LoginState> {
   final TextEditingController emailController= TextEditingController();
   final TextEditingController passwordController= TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isRemember=false;
 
   final LoginUseCase useCase;
-  LoginCubit(this.useCase,)
+  LoginCubit(this.useCase, )
     : super(LoginInitial());
 
   Future<void> login() async {
@@ -34,15 +36,18 @@ class LoginCubit extends Cubit<LoginState> {
        switch (result) {
       case ApiSuccessResult<LoginEntity>():
         emit(LoginSuccess(loginEntity: result.data));
+        if(isRemember){
+          TokenStorage.saveToken(result.data.token);
+        }else{
+          TokenStorage.deleteToken();
+        }
         break;
 
       case ApiErrorResult<LoginEntity> ():
         emit(LoginError(result.errorMessage));
         break;
 
-      default:
-        emit(LoginError("Unexpected error"));
-        break;
+    
     }
     } on Exception catch (e) {
       emit(LoginError(e.toString()));
@@ -61,5 +66,14 @@ class LoginCubit extends Cubit<LoginState> {
     passwordController.dispose();
     return super.close();
   }
+
+ void onChangeRemember(bool value){
+    isRemember=value;
+    emit(LoginRememberme(isRemember));
+
+
+  }
+ 
+  
 
 }

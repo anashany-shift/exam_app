@@ -29,8 +29,7 @@ class LoginListener extends StatelessWidget {
             );
             break;
 
-          case LoginInitial():
-            throw UnimplementedError();
+
           case LoginLoading():
             showDialog(
               context: context,
@@ -49,6 +48,13 @@ class LoginListener extends StatelessWidget {
               CustomSnackBar.error(message: state.errorMessage),
             );
             print(state.errorMessage);
+          case LoginInitial():
+          // Do nothing (state at cubit init).
+            break;
+
+          case LoginRememberme():
+          // Do nothing (UI will rebuild using BlocBuilder).
+            break;
         }
       },
 
@@ -57,20 +63,3 @@ class LoginListener extends StatelessWidget {
   }
 }
 
-
-//  if (state is LoginSuccess) {
-//             Navigator.of(context).pop(); // Close loading dialog
-//             showTopSnackBar(
-//               Overlay.of(context),
-//               const CustomSnackBar.success(message: "Login successful!"),
-//             );
-//             Navigator.pushNamedAndRemoveUntil(
-//               context,
-//               Routes.mainLayout,
-//                   (route) => false,
-//             );
-//           } else if (state is LoginLoading) {
-           
-//           } else if (state is LoginError) {
-           
-//           }

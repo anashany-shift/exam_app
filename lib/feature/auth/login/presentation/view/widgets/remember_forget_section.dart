@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/routes/routes.dart';
 
-class RemeberAndForgetSection extends StatefulWidget {
-  const RemeberAndForgetSection({super.key});
+class RemeberAndForgetSection extends StatelessWidget {
+  const RemeberAndForgetSection({super.key,required this.onChanged, required this.isRemember});
+final  void Function(bool?)?onChanged; 
+final bool isRemember;
 
-  @override
-  State<RemeberAndForgetSection> createState() =>
-      _RemeberAndForgetSectionState();
-}
-
-bool rememberMe = false;
-
-class _RemeberAndForgetSectionState extends State<RemeberAndForgetSection> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -20,12 +14,9 @@ class _RemeberAndForgetSectionState extends State<RemeberAndForgetSection> {
     return Row(
       children: [
         Checkbox(
-          value: rememberMe,
-          onChanged: (value) {
-            setState(() {
-              rememberMe = value ?? false;
-            });
-          },
+          value:isRemember,
+          onChanged:onChanged
+          
         ),
         Text('Remember me', style: theme.textTheme.bodyMedium),
        const Expanded(child: SizedBox()),
@@ -45,3 +36,5 @@ class _RemeberAndForgetSectionState extends State<RemeberAndForgetSection> {
     );
   }
 }
+
+bool rememberMe = false;

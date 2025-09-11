@@ -12,10 +12,7 @@ import '../../../../../../core/widget/custom_text_form_field.dart';
 import '../../view_model/login_cubit.dart';
 
 class LoginBuilder extends StatelessWidget {
-  const LoginBuilder({
-    super.key,
-  });
-
+  const LoginBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +53,15 @@ class LoginBuilder extends StatelessWidget {
 
                 SizedBox(height: 16.h),
 
-                const RemeberAndForgetSection(),
+                BlocBuilder<LoginCubit, LoginState>(
+                  builder: (context, state) {
+                     final cubit = context.read<LoginCubit>();
+                   return RemeberAndForgetSection(
+                      isRemember: cubit.isRemember,
+                      onChanged: (value) =>cubit.onChangeRemember(value??false) ,
+                    );
+                  },
+                ),
                 SizedBox(height: 48.h),
 
                 CustomButton(
