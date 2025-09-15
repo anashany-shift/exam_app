@@ -1,3 +1,4 @@
+import 'package:exam_app/core/helper/token_storage.dart';
 import 'package:exam_app/core/routes/routes.dart';
 import 'package:exam_app/feature/main_layout/profile/view/widgets/profile_photo.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +99,14 @@ class ProfileView extends StatelessWidget {
           SizedBox(height: 48.h),
           CustomButton(
             buttonModel: ButtonModel(text: 'update', onPressed: () {}),
+          ),
+          SizedBox(height: 16.h),
+          CustomButton(
+            buttonModel: ButtonModel(text: 'log out', onPressed: () {
+              TokenStorage.deleteToken();
+              Navigator.pushReplacementNamed(context, Routes.login);
+
+            }),
           ),
           SizedBox(height: 16.h),
         ],

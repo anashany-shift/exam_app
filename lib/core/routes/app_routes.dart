@@ -1,8 +1,14 @@
+import 'package:exam_app/core/config/di.dart';
+import 'package:exam_app/feature/auth/forget_password/presentation/view_model/forget_password_cubit.dart';
+import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart'
+    show LoginCubit;
+import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../feature/answer/view/answer_view.dart';
-import '../../feature/auth/forget_password/view/forget_password_view.dart';
-import '../../feature/auth/login/view/login_view.dart';
+import '../../feature/auth/forget_password/presentation/view/forget_password_view.dart';
+import '../../feature/auth/login/presentation/view/login_view.dart';
 import '../../feature/auth/sign_up/view/sign_up_view.dart';
 import '../../feature/exam/exam_soccer/view/exam_score_view.dart';
 import '../../feature/exam/view/exam_view.dart';
@@ -16,11 +22,22 @@ abstract class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.login:
-        return MaterialPageRoute(builder: (_) => const LoginView());
+        return MaterialPageRoute(builder: (_) =>
+            BlocProvider<LoginCubit>(
+              create: (context) => getIt.get<LoginCubit>(),
+              child: const LoginView(),
+            ));
       case Routes.signUp:
-        return MaterialPageRoute(builder: (_) => const SignUpView());
+        return MaterialPageRoute(builder: (_) =>
+            BlocProvider(
+              create: (context) => getIt.get<SignupCubit>(),
+              child: const SignUpView(),
+            ));
       case Routes.forgetPassword:
-        return MaterialPageRoute(builder: (_) => const ForgetPasswordView());
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+          create: (context) => getIt.get<ForgetPasswordCubit>(),
+          child: const ForgetPasswordView(),
+        ));
       case Routes.mainLayout:
         return MaterialPageRoute(builder: (_) => const MainLayoutView());
       case Routes.subject:
@@ -36,11 +53,11 @@ abstract class AppRoutes {
       case Routes.examScore:
         return MaterialPageRoute(builder: (_) => const ExamScoreView());
 
-      // Define your routes here
+    // Define your routes here
       default:
         return MaterialPageRoute(
           builder: (_) =>
-              const Scaffold(body: Center(child: Text('Page not found'))),
+          const Scaffold(body: Center(child: Text('Page not found'))),
         );
     }
   }

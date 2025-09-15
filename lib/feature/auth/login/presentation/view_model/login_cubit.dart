@@ -1,0 +1,81 @@
+import 'package:bloc/bloc.dart';
+import 'package:exam_app/core/config/api_result.dart';
+import 'package:exam_app/core/helper/token_storage.dart';
+import 'package:exam_app/feature/auth/login/domain/entities/login_entity.dart';
+import 'package:exam_app/feature/auth/login/domain/useCases/login_use_case.dart';
+import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../data/model/login_request.dart';
+
+part 'login_state.dart';
+
+@injectable
+class LoginCubit extends Cubit<LoginState> {
+  final TextEditingController emailController= TextEditingController();
+  final TextEditingController passwordController= TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isRemember=false;
+
+  final LoginUseCase useCase;
+  LoginCubit(this.useCase, )
+    : super(LoginInitial());
+
+  Future<void> login() async {
+  
+    emit(LoginLoading());
+
+    try {
+      var result = await useCase.call(
+        loginRequest:LoginRequest(
+          email: emailController.text,
+          password: passwordController.text,
+        )
+      );
+
+    
+       switch (result) {
+      case ApiSuccessResult<LoginEntity>():
+
+        emit(LoginSuccess(loginEntity: result.data));
+        if(isRemember){
+          TokenStorage.saveToken(result.data.token);
+        }else{
+          TokenStorage.deleteToken();
+        }
+        break;
+
+      case ApiErrorResult<LoginEntity> ():
+        emit(LoginError(result.errorMessage));
+        break;
+
+    
+    }
+    } on Exception catch (e) {
+      emit(LoginError(e.toString()));
+    }
+  }
+  loginValidate({required GlobalKey<FormState> formKey}){
+    if (formKey.currentState!.validate()){
+      login();
+    }
+
+
+  }
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    passwordController.dispose();
+    return super.close();
+  }
+
+ void onChangeRemember(bool value){
+    isRemember=value;
+    emit(LoginRememberme(isRemember));
+
+
+  }
+ 
+  
+
+}

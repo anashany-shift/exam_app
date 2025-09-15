@@ -1,12 +1,13 @@
-abstract  class Validation {
+import 'package:flutter/widgets.dart';
 
-static String? validateText(String? value){
-  if  (value==null ||value.isEmpty){
-    return "This field Empty";
+abstract class Validation {
+  static String? validateText(String? value) {
+    if (value == null || value.isEmpty) {
+      return "This field Empty";
+    }
+    return null;
   }
-      return null;
 
-}
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
@@ -33,14 +34,23 @@ static String? validateText(String? value){
 
     return null;
   }
-  static String? validatePin(String? value) {
-  if (value == null || value.isEmpty) {
-    return "Code is required";
-  }
-  if (value != "1234") {
-    return "Invalid Code";
-  }
-  return null;
-}
-}
 
+  static String? validateConfirmedPassword(String? value,TextEditingController passwordController) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    }
+    if (value != passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+
+  }
+
+  static String? validatePin(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Code is required";
+    }
+
+    return null;
+  }
+}

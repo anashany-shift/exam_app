@@ -37,11 +37,29 @@ dependencies:
   flutter_screenutil: ^5.9.3
   pinput: ^5.0.1
   flutter_svg: ^2.2.0
-  circular_countdown_timer: ^0.2.4
+  dartz: ^0.10.1
+  bloc: ^9.0.0
+  flutter_bloc:
+  retrofit: ^4.6.0
+  logger: ^2.6.0  # for logging purpose
+  json_annotation: ^4.9.0
+    # add injectable to your dependencies
+  injectable:
+  get_it:
+  pretty_dio_logger: ^1.4.0
+  flutter_secure_storage: ^9.2.4
+
+
   flutter_countdown_timer: ^4.1.0
   fl_chart: ^0.68.0
+  dio: ^5.9.0
+  shared_preferences: ^2.5.3
+  top_snackbar_flutter: ^3.3.0
 
 dev_dependencies:
+  injectable_generator:
+  retrofit_generator: ^10.0.1
+  json_serializable: ^6.10.0
   build_runner:
   flutter_gen_runner:
   flutter_test:
