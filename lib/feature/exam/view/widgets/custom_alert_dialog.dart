@@ -6,7 +6,8 @@ import 'package:exam_app/core/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomAlertDialog extends StatelessWidget {
-  const CustomAlertDialog({super.key});
+  const CustomAlertDialog({super.key, this.text="time out"} );
+  final String text ;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,9 @@ class CustomAlertDialog extends StatelessWidget {
           ),
 
           // النص
-          const Text(
-            "Time out !!",
-            style: TextStyle(
+           Text(
+            text,
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
               color: AppColors.red,

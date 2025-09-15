@@ -1,49 +1,69 @@
 import 'package:dio/dio.dart';
 
-abstract class Failure {
-  final String errorMessage;
 
-  Failure({required this.errorMessage});
+abstract class Failure{
+  final String errorMassage;
+
+  Failure(this.errorMassage);
 }
+class ServerFailure extends Failure{
+  ServerFailure(super.errorMassage);
 
-class ServerFailure extends Failure {
-  ServerFailure({required super.errorMessage});
+  factory ServerFailure.fromDioError(DioException dioError){
+    switch(dioError.type){
 
-  factory ServerFailure.fromDio(DioException dioError) {
-    switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
-        return ServerFailure(errorMessage: 'Connection Timeout');
+        return ServerFailure('Connection timeout with Api server');
       case DioExceptionType.sendTimeout:
-        return ServerFailure(errorMessage: 'Send Timeout');
+        return ServerFailure('send timeout with Api server');
       case DioExceptionType.receiveTimeout:
-        return ServerFailure(errorMessage: 'Receive Timeout');
+        return ServerFailure('receive timeout with Api server');
       case DioExceptionType.badCertificate:
-        return ServerFailure(errorMessage: 'Bad Certificate');
+        return ServerFailure('badCertificate with Api server');
       case DioExceptionType.badResponse:
-        return ServerFailure.fromResponse(dioError.response!.statusCode!);
+        return ServerFailure.fromResponseError(dioError.response!.statusCode!, dioError.response!.data);
       case DioExceptionType.cancel:
-        return ServerFailure(errorMessage: 'Request Cancelled');
+        return ServerFailure('request cancel with server');
       case DioExceptionType.connectionError:
-        return ServerFailure(errorMessage: 'Connection Error');
+        return ServerFailure('No internet');
       case DioExceptionType.unknown:
-        return ServerFailure(errorMessage: 'Unknown Error');
+        return ServerFailure('oops there was an error ,please try again');
+       }
+  }
+
+  factory ServerFailure.fromResponseError(int statusCode, dynamic response) {
+    try {
+      if (response is Map<String, dynamic>) {
+       
+        if (response.containsKey('message')) {
+          return ServerFailure(response['message']);
+        }
+        
+        if (response['error'] is Map && response['error']['message'] != null) {
+          return ServerFailure(response['error']['message']);
+        }
+        if (response['errors'] is Map) {
+        
+          final firstError = response['errors'].values.first;
+          if (firstError is String) {
+            return ServerFailure(firstError);
+          }
+        }
+      }
+       if(statusCode == 400 || statusCode ==401 ||statusCode==402 ||statusCode==403){
+         return ServerFailure(response['error']['message']);
+       }
+     else if (statusCode == 404) {
+        return ServerFailure('Your request was not found, please try again.');
+      } else if (statusCode == 500) {
+        return ServerFailure('Internal server error');
+      }
+
+      return ServerFailure('Oops! Something went wrong. Please try again.');
+    } catch (e) {
+      
+      return ServerFailure('Unexpected error format from server');
     }
   }
-  factory ServerFailure.fromResponse(int statusCode) {
-    const statusMessages = {
-      400: 'Invalid Code',
-      401: 'Email or password invalid',
-      409: 'Email already exist',
-      403: 'Forbidden',
-      404: 'Not Found',
-      500: 'Internal Server Error',
-      502: 'Bad Gateway',
-      503: 'Service Unavailable',
-      504: 'Gateway Timeout',
-    };
 
-    return ServerFailure(
-      errorMessage: statusMessages[statusCode] ?? 'Error: $statusCode',
-    );
-  }
 }

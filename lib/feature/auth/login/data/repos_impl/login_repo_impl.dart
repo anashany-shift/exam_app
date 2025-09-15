@@ -12,38 +12,25 @@ import '../../../../../core/error/failuer.dart';
 @Injectable(as: LoginRepo)
 class LoginRepoImpl implements LoginRepo {
   final LoginRemoteDataSource loginRemoteDataSource;
-  
 
   LoginRepoImpl(this.loginRemoteDataSource);
   @override
   Future<ApiResult<LoginEntity>> login({
     required LoginRequest loginRequest,
   }) async {
-    
-
     try {
       final response = await loginRemoteDataSource.login(
         loginRequest: loginRequest,
       );
-      // TokenStorage.saveToken(response.token??"");
-
-      // final tokens=await TokenStorage.getToken();
-      // print("tokennnns--------$tokens");
-     
-
-
 
       final entity = response.toEntity();
       return ApiSuccessResult(entity);
-      
-
-
     } catch (e) {
-      if (e is DioException) {
-        return ApiErrorResult(ServerFailure.fromDio(e).errorMessage);
+       if (e is DioException) {
+        return ApiErrorResult(ServerFailure.fromDioError(e).errorMassage);
       } else {
         return ApiErrorResult(
-          ServerFailure(errorMessage: e.toString()).errorMessage,
+          ServerFailure(e.toString()).errorMassage
         );
       }
     }

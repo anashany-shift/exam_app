@@ -13,6 +13,24 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../feature/auth/forget_password/api/client/forget_password_api_client.dart'
+    as _i585;
+import '../../feature/auth/forget_password/api/datasource_impl/forget_password_datasource_impl.dart'
+    as _i547;
+import '../../feature/auth/forget_password/data/datasources/forget_password_datasource.dart'
+    as _i57;
+import '../../feature/auth/forget_password/data/repo_impl/forget_password_repo_impl.dart'
+    as _i1049;
+import '../../feature/auth/forget_password/domain/repos/forget_password_repo.dart'
+    as _i654;
+import '../../feature/auth/forget_password/domain/useCases/enter_email_useCase.dart'
+    as _i739;
+import '../../feature/auth/forget_password/domain/useCases/reset_password_useCase.dart'
+    as _i705;
+import '../../feature/auth/forget_password/domain/useCases/verify_code_useCase.dart'
+    as _i479;
+import '../../feature/auth/forget_password/presentation/view_model/forget_password_cubit.dart'
+    as _i609;
 import '../../feature/auth/login/api/client/login_api_client.dart' as _i1033;
 import '../../feature/auth/login/api/datasource_impl/login_remote_datasource_impl.dart'
     as _i444;
@@ -23,6 +41,17 @@ import '../../feature/auth/login/domain/repos/login_repo.dart' as _i261;
 import '../../feature/auth/login/domain/useCases/login_use_case.dart' as _i726;
 import '../../feature/auth/login/presentation/view_model/login_cubit.dart'
     as _i739;
+import '../../feature/auth/sign_up/api/client/signup_api_client.dart' as _i48;
+import '../../feature/auth/sign_up/api/datasuource_impl/signup_remote_datasource_impl.dart'
+    as _i678;
+import '../../feature/auth/sign_up/data/data_source.dart/signup_remote_datasource.dart'
+    as _i323;
+import '../../feature/auth/sign_up/data/repo_impl/signup_repo_impl.dart'
+    as _i578;
+import '../../feature/auth/sign_up/domain/repos/signup_repo.dart' as _i53;
+import '../../feature/auth/sign_up/domain/useCases/signup_usecase.dart'
+    as _i1049;
+import '../../feature/auth/sign_up/view/view_model/signup_cubit.dart' as _i353;
 import '../module/dio_module.dart' as _i545;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -37,8 +66,34 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1033.LoginApiClient>(
       () => _i1033.LoginApiClient.new(gh<_i361.Dio>()),
     );
+    gh.factory<_i48.SignupApiClient>(
+      () => _i48.SignupApiClient.new(gh<_i361.Dio>()),
+    );
+    gh.factory<_i585.ForgetPasswordApiClient>(
+      () => _i585.ForgetPasswordApiClient.new(gh<_i361.Dio>()),
+    );
+    gh.factory<_i57.ForgetPasswordDataSource>(
+      () => _i547.ForgetPasswordDataSourceImpl(
+        gh<_i585.ForgetPasswordApiClient>(),
+      ),
+    );
+    gh.factory<_i654.ForgetPasswordRepo>(
+      () => _i1049.ForgetPasswordRepoImpl(gh<_i57.ForgetPasswordDataSource>()),
+    );
+    gh.factory<_i739.EnterEmailUseCase>(
+      () => _i739.EnterEmailUseCase(gh<_i654.ForgetPasswordRepo>()),
+    );
+    gh.factory<_i479.VerifyCodeUseCase>(
+      () => _i479.VerifyCodeUseCase(gh<_i654.ForgetPasswordRepo>()),
+    );
+    gh.factory<_i705.ResetPasswordUseCase>(
+      () => _i705.ResetPasswordUseCase(gh<_i654.ForgetPasswordRepo>()),
+    );
     gh.factory<_i493.LoginRemoteDataSource>(
       () => _i444.LoginRemoteDateSourceImpl(gh<_i1033.LoginApiClient>()),
+    );
+    gh.factory<_i323.SignupRemoteDatasource>(
+      () => _i678.SignupRemoteDatasourceImpl(gh<_i48.SignupApiClient>()),
     );
     gh.factory<_i261.LoginRepo>(
       () => _i536.LoginRepoImpl(gh<_i493.LoginRemoteDataSource>()),
@@ -46,8 +101,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i726.LoginUseCase>(
       () => _i726.LoginUseCase(gh<_i261.LoginRepo>()),
     );
+    gh.factory<_i609.ForgetPasswordCubit>(
+      () => _i609.ForgetPasswordCubit(
+        gh<_i739.EnterEmailUseCase>(),
+        gh<_i479.VerifyCodeUseCase>(),
+        gh<_i705.ResetPasswordUseCase>(),
+      ),
+    );
     gh.factory<_i739.LoginCubit>(
       () => _i739.LoginCubit(gh<_i726.LoginUseCase>()),
+    );
+    gh.factory<_i53.SignupRepo>(
+      () => _i578.SignupRepoImpl(
+        signupRemoteDatasource: gh<_i323.SignupRemoteDatasource>(),
+      ),
+    );
+    gh.factory<_i1049.SignupUseCase>(
+      () => _i1049.SignupUseCase(gh<_i53.SignupRepo>()),
+    );
+    gh.factory<_i353.SignupCubit>(
+      () => _i353.SignupCubit(gh<_i1049.SignupUseCase>()),
     );
     return this;
   }

@@ -32,9 +32,11 @@ class LoginCubit extends Cubit<LoginState> {
           password: passwordController.text,
         )
       );
+
     
        switch (result) {
       case ApiSuccessResult<LoginEntity>():
+
         emit(LoginSuccess(loginEntity: result.data));
         if(isRemember){
           TokenStorage.saveToken(result.data.token);

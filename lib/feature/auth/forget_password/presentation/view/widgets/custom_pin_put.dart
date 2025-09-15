@@ -4,18 +4,14 @@ import 'package:pinput/pinput.dart';
 
 import '../../../../../../core/utils/app_colors.dart';
 
-class CustomPinPut extends StatefulWidget {
-  const CustomPinPut({super.key, required this.onCompleted});
-
-  final void Function()? onCompleted;
-
-  @override
-  State<CustomPinPut> createState() => _CustomPinPutState();
-}
-
-class _CustomPinPutState extends State<CustomPinPut> {
-  final TextEditingController pinController = TextEditingController();
-  String? errorText;
+class CustomPinPut extends StatelessWidget {
+  CustomPinPut({
+    super.key,
+    required this.onCompleted,
+    required this.pinController,
+  });
+  final TextEditingController pinController;
+  final void Function(String)? onCompleted;
 
   final pinStyle = PinTheme(
     height: 80,
@@ -33,9 +29,12 @@ class _CustomPinPutState extends State<CustomPinPut> {
     return SizedBox(
       width: double.infinity,
       child: Pinput(
+        length: 6,
         controller: pinController,
         validator: Validation.validatePin,
-        onCompleted: _handleCompleted,
+        onCompleted: (value) {
+          onCompleted?.call(value);
+        },
 
         keyboardType: TextInputType.number,
         defaultPinTheme: pinStyle,
@@ -46,17 +45,5 @@ class _CustomPinPutState extends State<CustomPinPut> {
         submittedPinTheme: pinStyle,
       ),
     );
-  }
-
-
-
-  void _handleCompleted(String value) {
-    if (value == "1234") {
-      widget.onCompleted?.call();
-    } else {
-      setState(() {
-        errorText = "Invalid Code";
-      });
-    }
   }
 }
