@@ -3,6 +3,7 @@ import 'package:exam_app/feature/auth/forget_password/presentation/view_model/fo
 import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart';
 import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
 import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
+import 'package:exam_app/feature/subject/presentation/view_model/subject_exam_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,34 +23,45 @@ abstract class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.login:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider<LoginCubit>(
-              create: (context) => getIt.get<LoginCubit>(),
-              child: const LoginView(),
-            ));
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<LoginCubit>(
+            create: (context) => getIt.get<LoginCubit>(),
+            child: const LoginView(),
+          ),
+        );
       case Routes.signUp:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider(
-              create: (context) => getIt.get<SignupCubit>(),
-              child: const SignUpView(),
-            ));
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt.get<SignupCubit>(),
+            child: const SignUpView(),
+          ),
+        );
       case Routes.forgetPassword:
-        return MaterialPageRoute(builder: (_) => BlocProvider(
-          create: (context) => getIt.get<ForgetPasswordCubit>(),
-          child: const ForgetPasswordView(),
-        ));
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt.get<ForgetPasswordCubit>(),
+            child: const ForgetPasswordView(),
+          ),
+        );
       case Routes.mainLayout:
-        return MaterialPageRoute(builder: (_) => MultiBlocProvider(
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
             providers: [
-            BlocProvider(
-                create: (context) => getIt.get<ExploreCubit>()..getSubjects(),),
-
-
+              BlocProvider(
+                create: (context) => getIt.get<ExploreCubit>()..getSubjects(),
+              ),
             ],
-            child: const MainLayoutView()));
+            child: const MainLayoutView(),
+          ),
+        );
       case Routes.subject:
-        final subjectId=settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => const SubjectView());
+        final subjectId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt.get<SubjectExamCubit>()..getSubjectExam(subjectId),
+            child: SubjectView(subjectId: subjectId),
+          ),
+        );
       case Routes.subjectDetails:
         return MaterialPageRoute(builder: (_) => const SubjectDetailsView());
       case Routes.exam:
@@ -61,11 +73,11 @@ abstract class AppRoutes {
       case Routes.examScore:
         return MaterialPageRoute(builder: (_) => const ExamScoreView());
 
-    // Define your routes here
+      // Define your routes here
       default:
         return MaterialPageRoute(
           builder: (_) =>
-          const Scaffold(body: Center(child: Text('Page not found'))),
+              const Scaffold(body: Center(child: Text('Page not found'))),
         );
     }
   }

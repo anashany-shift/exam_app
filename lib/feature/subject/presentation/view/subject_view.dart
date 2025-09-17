@@ -2,7 +2,8 @@ import 'package:exam_app/feature/subject/presentation/view/widgets/subject_view_
 import 'package:flutter/material.dart';
 
 class SubjectView extends StatelessWidget {
-  const SubjectView({super.key});
+  const SubjectView({super.key, required this.subjectId});
+  final String subjectId;
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
