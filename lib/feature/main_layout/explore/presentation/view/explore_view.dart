@@ -1,6 +1,6 @@
 import 'package:exam_app/core/models/text_field_model.dart';
 import 'package:exam_app/core/widget/custom_text_form_field.dart';
-import 'package:exam_app/feature/main_layout/explore/view/widgets/subject_card_list_view.dart';
+import 'package:exam_app/feature/main_layout/explore/presentation/view/widgets/subject_card_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,7 +31,7 @@ class ExploreView extends StatelessWidget {
         SizedBox(height: 40.h),
         Text("Browse by subject", style: theme.textTheme.titleMedium),
         SizedBox(height: 24.h),
-        const SubjectCardListView(),
+        const Expanded(child: SubjectCardListView()),
       ],
     );
   }

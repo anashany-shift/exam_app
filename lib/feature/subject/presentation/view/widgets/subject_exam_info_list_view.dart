@@ -1,4 +1,4 @@
-import 'package:exam_app/feature/subject/view/widgets/subject_exam_info_card_item.dart';
+import 'package:exam_app/feature/subject/presentation/view/widgets/subject_exam_info_card_item.dart';
 import 'package:flutter/material.dart';
 
 class SubjectExamInfoListView extends StatelessWidget {

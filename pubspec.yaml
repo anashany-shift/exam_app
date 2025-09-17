@@ -55,6 +55,9 @@ dependencies:
   dio: ^5.9.0
   shared_preferences: ^2.5.3
   top_snackbar_flutter: ^3.3.0
+  cached_network_image: ^3.4.1
+  sqflite: ^2.3.0
+  flutter_spinkit: ^5.2.2
 
 dev_dependencies:
   injectable_generator:

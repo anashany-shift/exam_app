@@ -1,8 +1,8 @@
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/feature/auth/forget_password/presentation/view_model/forget_password_cubit.dart';
-import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart'
-    show LoginCubit;
+import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart';
 import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
+import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +14,7 @@ import '../../feature/exam/exam_soccer/view/exam_score_view.dart';
 import '../../feature/exam/view/exam_view.dart';
 import '../../feature/main_layout/main_layout_view.dart';
 import '../../feature/reset_password/view/reset_password_view.dart';
-import '../../feature/subject/view/subject_view.dart';
+import '../../feature/subject/presentation/view/subject_view.dart';
 import '../../feature/subject_details/view/subject_details_view.dart';
 import 'routes.dart';
 
@@ -39,7 +39,14 @@ abstract class AppRoutes {
           child: const ForgetPasswordView(),
         ));
       case Routes.mainLayout:
-        return MaterialPageRoute(builder: (_) => const MainLayoutView());
+        return MaterialPageRoute(builder: (_) => MultiBlocProvider(
+            providers: [
+            BlocProvider(
+                create: (context) => getIt.get<ExploreCubit>()..getSubjects(),),
+
+
+            ],
+            child: const MainLayoutView()));
       case Routes.subject:
         return MaterialPageRoute(builder: (_) => const SubjectView());
       case Routes.subjectDetails:

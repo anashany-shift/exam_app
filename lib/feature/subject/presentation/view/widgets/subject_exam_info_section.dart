@@ -1,4 +1,4 @@
-import 'package:exam_app/feature/subject/view/widgets/subject_exam_info_list_view.dart';
+import 'package:exam_app/feature/subject/presentation/view/widgets/subject_exam_info_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

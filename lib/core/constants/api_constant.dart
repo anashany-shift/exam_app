@@ -5,5 +5,7 @@ abstract class ApiConstant{
   static const enterEmailEndPoint="auth/forgotPassword";
   static const verifyResetCodeEndPoint="auth/verifyResetCode";
   static const restPasswordEndPoint="auth/resetPassword";
+  static const getAllSubjectsEndPoint="subjects";
+  static const getExamBySubjectsIdEndPoint="exams";
 
 }

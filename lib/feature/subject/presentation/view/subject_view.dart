@@ -1,4 +1,4 @@
-import 'package:exam_app/feature/subject/view/widgets/subject_view_body.dart';
+import 'package:exam_app/feature/subject/presentation/view/widgets/subject_view_body.dart';
 import 'package:flutter/material.dart';
 
 class SubjectView extends StatelessWidget {
