@@ -48,6 +48,7 @@ abstract class AppRoutes {
             ],
             child: const MainLayoutView()));
       case Routes.subject:
+        final subjectId=settings.arguments as String;
         return MaterialPageRoute(builder: (_) => const SubjectView());
       case Routes.subjectDetails:
         return MaterialPageRoute(builder: (_) => const SubjectDetailsView());

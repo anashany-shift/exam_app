@@ -103,7 +103,7 @@ class ProfileView extends StatelessWidget {
           SizedBox(height: 16.h),
           CustomButton(
             buttonModel: ButtonModel(text: 'log out', onPressed: () {
-              TokenStorage.deleteToken();
+              TokenStorage.deleteAll();
               Navigator.pushReplacementNamed(context, Routes.login);
 
             }),

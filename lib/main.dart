@@ -12,7 +12,7 @@ final RouteObserver<ModalRoute<void>> routeObserver =
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  bool isLogged = await TokenStorage.hasToken();
+  bool isLogged = await TokenStorage.getRememberMeFlag();
   runApp( MyApp(isLogged: isLogged));
 
 }

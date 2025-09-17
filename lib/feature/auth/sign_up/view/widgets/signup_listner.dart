@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import '../../../../../core/widget/custom_progress_indicator.dart';
+
 class SignupListner extends StatelessWidget {
   const SignupListner({
     super.key, required this.widget,
@@ -39,7 +41,7 @@ class SignupListner extends StatelessWidget {
                return const AlertDialog(
                  elevation: 0,
                  backgroundColor: Colors.transparent,
-                 title: Center(child: CircularProgressIndicator()),
+                 title: Center(child: CustomProgressIndicator()),
                );
              },
            );

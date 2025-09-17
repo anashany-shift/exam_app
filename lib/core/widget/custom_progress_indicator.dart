@@ -7,9 +7,10 @@ class CustomProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return  const Center(
       child:
       SpinKitThreeInOut(
+
         size: 30,
         color:AppColors.blue ,
 
