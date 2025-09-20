@@ -41,10 +41,12 @@ class SubjectExamDto {
 extension SubjectExamResponseMapper on SubjectExamDto {
   SubjectExamEntity toEntity() {
     return SubjectExamEntity(
+
       title: title,
       id: Id,
       duration: duration,
       numberOfQuestions: numberOfQuestions,
+      subjectId: subject
     );
   }
 }

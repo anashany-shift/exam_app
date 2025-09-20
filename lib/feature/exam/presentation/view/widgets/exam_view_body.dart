@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/models/button_model.dart';
 import '../../../../../core/utils/app_colors.dart';
-import '../../../answer/view/widgets/q_and_answer_widget.dart';
+import '../../../../answer/view/widgets/q_and_answer_widget.dart';
 import 'custom_alert_dialog.dart';
 import 'exam_view_header.dart';
 import 'progress_indicator_widget.dart';

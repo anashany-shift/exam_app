@@ -17,25 +17,40 @@ class ExamInstructions extends StatelessWidget {
       children: [
         Text("Instructions", style: theme.textTheme.titleMedium),
         SizedBox(height: 16.h),
-        ...List.generate(
-          4,
-              (index) => Padding(
+         Padding(
             padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 6),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("• ",
-                    style: TextStyle(fontSize: 16)),
                 Expanded(
-                  child: Text(
-                    "Lorem ipsum dolor sit amet consectetur.",
-                    style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.grey),
-                  ),
+                  child:Column(
+                    children: [
+                      Text(
+                        "• Please read all questions carefully before answering.",
+                        style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.grey),
+                      ),
+
+                      Text(
+                        "• You must complete the exam within the given time limit.",
+                        style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.grey),
+                      ),
+
+                      Text(
+                        "• Do not use any external materials or devices during the exam.",
+                        style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.grey),
+                      ),
+
+                      Text(
+                        "• Make sure to review your answers before final submission.",
+                        style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.grey),
+                      ),
+                    ],
+                  )
                 ),
               ],
             ),
           ),
-        ),
+
 
       ],
     );

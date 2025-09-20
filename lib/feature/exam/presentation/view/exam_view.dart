@@ -1,4 +1,4 @@
-import 'package:exam_app/feature/exam/view/widgets/exam_view_body.dart';
+import 'package:exam_app/feature/exam/presentation/view/widgets/exam_view_body.dart';
 import 'package:flutter/material.dart';
 
 class ExamView extends StatelessWidget {

@@ -3,6 +3,7 @@ import 'package:exam_app/feature/auth/forget_password/presentation/view_model/fo
 import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart';
 import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
 import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
+import 'package:exam_app/feature/subject/domain/entities/subject_exam_entity.dart';
 import 'package:exam_app/feature/subject/presentation/view_model/subject_exam_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,7 @@ import '../../feature/auth/forget_password/presentation/view/forget_password_vie
 import '../../feature/auth/login/presentation/view/login_view.dart';
 import '../../feature/auth/sign_up/view/sign_up_view.dart';
 import '../../feature/exam/exam_soccer/view/exam_score_view.dart';
-import '../../feature/exam/view/exam_view.dart';
+import '../../feature/exam/presentation/view/exam_view.dart';
 import '../../feature/main_layout/main_layout_view.dart';
 import '../../feature/reset_password/view/reset_password_view.dart';
 import '../../feature/subject/presentation/view/subject_view.dart';
@@ -63,7 +64,10 @@ abstract class AppRoutes {
           ),
         );
       case Routes.subjectDetails:
-        return MaterialPageRoute(builder: (_) => const SubjectDetailsView());
+
+        return MaterialPageRoute(builder: (_) =>  SubjectDetailsView(
+           subjectExamEntity : settings.arguments as SubjectExamEntity,
+        ));
       case Routes.exam:
         return MaterialPageRoute(builder: (_) => const ExamView());
       case Routes.resetPassword:

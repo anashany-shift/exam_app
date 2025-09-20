@@ -22,7 +22,7 @@ class SubjectExamInfoCardItem extends StatelessWidget {
       child: InkWell(
         onTap: () async{
           if (!context.mounted) return;
-          await Navigator.pushNamed(context, Routes.subjectDetails);
+          await Navigator.pushNamed(context, Routes.subjectDetails,arguments:subjectExam );
 
         },
         child: Padding(

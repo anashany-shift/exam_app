@@ -2,6 +2,7 @@ import 'package:exam_app/core/models/button_model.dart';
 import 'package:exam_app/core/routes/routes.dart';
 import 'package:exam_app/core/utils/app_colors.dart';
 import 'package:exam_app/core/widget/custom_button.dart';
+import 'package:exam_app/feature/subject/domain/entities/subject_exam_entity.dart';
 import 'package:exam_app/feature/subject_details/view/widgets/subject_details_exam_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'exam_instructions.dart';
 
 class SubjectDetailsViewBody extends StatelessWidget {
-  const SubjectDetailsViewBody({super.key});
+  const SubjectDetailsViewBody({super.key, required this.subjectExam});
+  final SubjectExamEntity subjectExam;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,11 @@ class SubjectDetailsViewBody extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.all(16.sp),
-          child: const SubjectDetailsExamInfo(),
+          child: SubjectDetailsExamInfo(
+            title: subjectExam.title ?? "",
+            numberofQ: subjectExam.numberOfQuestions ?? 0,
+            duration: subjectExam.duration ?? 0,
+          ),
         ),
         Divider(height: 5, thickness: 1, color: AppColors.blue[20]),
         Expanded(
@@ -32,7 +38,7 @@ class SubjectDetailsViewBody extends StatelessWidget {
                   buttonModel: ButtonModel(
                     text: "Start",
                     onPressed: () {
-                      Navigator.pushNamed(context, Routes.exam);
+                      Navigator.pushNamed(context, Routes.exam,arguments:subjectExam.id);
                     },
                   ),
                 ),
