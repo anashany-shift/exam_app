@@ -1,20 +1,22 @@
+import 'package:bloc/bloc.dart';
+import 'package:exam_app/bloc_observer.dart';
 import 'package:exam_app/core/helper/token_storage.dart';
 import 'package:exam_app/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'core/config/di.dart';
 import 'core/routes/routes.dart';
 import 'core/theme/app_theme.dart';
 
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
-  bool isLogged = await TokenStorage.hasToken();
-  runApp( MyApp(isLogged: isLogged));
 
+  configureDependencies();
+  bool isLogged = await TokenStorage.getRememberMeFlag();
+  Bloc.observer = MyBlocObserver();
+  runApp(MyApp(isLogged: isLogged));
 }
 
 class MyApp extends StatelessWidget {
@@ -32,9 +34,8 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         navigatorObservers: [routeObserver],
         onGenerateRoute: AppRoutes.generateRoute,
-        initialRoute:isLogged? Routes.mainLayout:Routes.login,
+        initialRoute: isLogged ? Routes.mainLayout : Routes.login,
       ),
     );
   }
 }
-

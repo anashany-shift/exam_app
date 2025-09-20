@@ -37,12 +37,12 @@ class LoginCubit extends Cubit<LoginState> {
        switch (result) {
       case ApiSuccessResult<LoginEntity>():
 
+
+
         emit(LoginSuccess(loginEntity: result.data));
-        if(isRemember){
           TokenStorage.saveToken(result.data.token);
-        }else{
-          TokenStorage.deleteToken();
-        }
+          TokenStorage.saveRememberMeFlag(isRemember);
+
         break;
 
       case ApiErrorResult<LoginEntity> ():

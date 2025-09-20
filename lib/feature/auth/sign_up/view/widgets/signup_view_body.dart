@@ -5,17 +5,12 @@ import 'package:flutter/material.dart';
 
 
 
-class SignupViewBody extends StatefulWidget {
+class SignupViewBody extends StatelessWidget {
   const SignupViewBody({super.key});
 
   @override
-  State<SignupViewBody> createState() => _SignupViewBodyState();
-}
-
-class _SignupViewBodyState extends State<SignupViewBody> {
-  @override
   Widget build(BuildContext context) {
-  
+
     return const SignupListner(widget: SignupBuilder(),);
   }
 }

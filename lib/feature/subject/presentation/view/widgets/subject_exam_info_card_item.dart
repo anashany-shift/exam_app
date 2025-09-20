@@ -1,4 +1,5 @@
 import 'package:exam_app/core/routes/routes.dart';
+import 'package:exam_app/feature/subject/domain/entities/subject_exam_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,8 +8,9 @@ import '../../../../../core/utils/app_colors.dart';
 
 class SubjectExamInfoCardItem extends StatelessWidget {
   const SubjectExamInfoCardItem({
-    super.key,
+    super.key, required this.subjectExam,
   });
+  final SubjectExamEntity subjectExam;
 
 
   @override
@@ -20,7 +22,7 @@ class SubjectExamInfoCardItem extends StatelessWidget {
       child: InkWell(
         onTap: () async{
           if (!context.mounted) return;
-          await Navigator.pushNamed(context, Routes.subjectDetails);
+          await Navigator.pushNamed(context, Routes.subjectDetails,arguments:subjectExam );
 
         },
         child: Padding(
@@ -38,11 +40,11 @@ class SubjectExamInfoCardItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "High level",
+                      subjectExam.title??"",
                       style: theme.textTheme.bodyLarge,
                     ),
                     Text(
-                      "20 Question",
+                      "${subjectExam.numberOfQuestions} Question",
                       style: theme.textTheme.bodySmall!.copyWith(
                         color: AppColors.grey,
                       ),
@@ -56,7 +58,7 @@ class SubjectExamInfoCardItem extends StatelessWidget {
                 ),
               ),
               Text(
-                "30 minutes",
+                "${subjectExam.duration} minutes",
                 style: theme.textTheme.bodySmall!.copyWith(
                   color: theme.colorScheme.primary,
                 ),

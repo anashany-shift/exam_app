@@ -12,7 +12,7 @@ class SubjectExamInfoSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("English", style: theme.textTheme.titleSmall),
+        Text("Exam", style: theme.textTheme.titleSmall),
         SizedBox(height: 24.h),
         const SubjectExamInfoListView()
       ],

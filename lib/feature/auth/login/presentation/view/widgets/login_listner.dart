@@ -1,3 +1,4 @@
+import 'package:exam_app/core/widget/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -34,11 +35,7 @@ class LoginListener extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) {
-                return const AlertDialog(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  title: Center(child: CircularProgressIndicator()),
-                );
+                return CustomProgressIndicator();
               },
             );
           case LoginError():

@@ -12,6 +12,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../../../core/routes/routes.dart';
+import '../../../../../../core/widget/custom_progress_indicator.dart';
 import 'forget_password_screen_instructions.dart';
 
 
@@ -49,7 +50,7 @@ class ResetPassword extends StatelessWidget {
              return const AlertDialog(
                elevation: 0,
                backgroundColor: Colors.transparent,
-               title: Center(child: CircularProgressIndicator()),
+               title: Center(child: CustomProgressIndicator()),
              );
            },
          );

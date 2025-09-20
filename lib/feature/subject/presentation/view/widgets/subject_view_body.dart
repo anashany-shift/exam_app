@@ -1,5 +1,5 @@
 import 'package:exam_app/core/widget/custom_app_bar.dart';
-import 'package:exam_app/feature/subject/presentation/view/widgets/subject_exam_info_section_list_view.dart';
+import 'package:exam_app/feature/subject/presentation/view/widgets/subject_exam_info_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,10 +13,10 @@ class SubjectViewBody extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const CustomAppBar(title: "Language"),
+            const CustomAppBar(title: "Exam"),
 
             SizedBox(height: 40.h),
-            const Expanded(child: SubjectExamInfoSectionListView()),
+            const Expanded(child: SubjectExamInfoListView()),
           ],
         ),
       ),
