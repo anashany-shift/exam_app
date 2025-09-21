@@ -7,5 +7,6 @@ abstract class ApiConstant{
   static const restPasswordEndPoint="auth/resetPassword";
   static const getAllSubjectsEndPoint="subjects";
   static const getExamBySubjectsIdEndPoint="exams";
+  static const getQuestionByExamIdEndPoint="questions";
 
 }

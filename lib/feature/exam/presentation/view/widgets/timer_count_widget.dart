@@ -26,7 +26,7 @@ class _TimerCountWidgetState extends State<TimerCountWidget> {
   void initState() {
     super.initState();
     final endTime =
-        DateTime.now().millisecondsSinceEpoch + widget.duration * 1000;
+        DateTime.now().millisecondsSinceEpoch + widget.duration *60* 1000;
     _controller = CountdownTimerController(
       endTime: endTime,
       onEnd: _handleTimeFinish,

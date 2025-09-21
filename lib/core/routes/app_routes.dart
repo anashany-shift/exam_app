@@ -2,6 +2,7 @@ import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/feature/auth/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart';
 import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
+import 'package:exam_app/feature/exam/presentation/view_model/exam_cubit.dart';
 import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
 import 'package:exam_app/feature/subject/domain/entities/subject_exam_entity.dart';
 import 'package:exam_app/feature/subject/presentation/view_model/subject_exam_cubit.dart';
@@ -69,7 +70,13 @@ abstract class AppRoutes {
            subjectExamEntity : settings.arguments as SubjectExamEntity,
         ));
       case Routes.exam:
-        return MaterialPageRoute(builder: (_) => const ExamView());
+        final examId=settings.arguments as String;
+        return MaterialPageRoute(builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt.get<ExamCubit>()..getQuestions(examId: examId),)
+
+            ],
+            child: const ExamView()));
       case Routes.resetPassword:
         return MaterialPageRoute(builder: (_) => const ResetPasswordView());
       case Routes.answer:

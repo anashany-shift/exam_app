@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnswersContainerItem extends StatelessWidget {
   const AnswersContainerItem({
-    super.key, required this.isSelected,
+    super.key, required this.isSelected, required this.text,
   });
 
   final bool isSelected;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class AnswersContainerItem extends StatelessWidget {
                 
                 value: isSelected, onChanged: (value) {}),
               SizedBox(width: 8.w,),
-              Text("Its going to rain today.",style: theme.textTheme.bodyMedium,)
+              Text(text,style: theme.textTheme.bodyMedium,)
             ],
           ),
         ),

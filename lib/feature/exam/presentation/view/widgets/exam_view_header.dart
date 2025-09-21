@@ -6,8 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'timer_count_widget.dart';
 
 class ExamViewHeader extends StatelessWidget {
-  const ExamViewHeader({super.key, required this.onTimeFinish});
+  const ExamViewHeader({super.key, required this.onTimeFinish, required this.duration});
   final VoidCallback onTimeFinish;
+  final int duration;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class ExamViewHeader extends StatelessWidget {
               children: [
                 Image.asset(AppAssets.clock),
                 SizedBox(width: 3.w),
-                 TimerCountWidget(duration: 10,onTimeFinish:onTimeFinish,),
+                 TimerCountWidget(duration: duration,onTimeFinish:onTimeFinish,),
               ],
             ),
           ],

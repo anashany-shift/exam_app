@@ -1,3 +1,4 @@
+import 'package:exam_app/feature/exam/domain/entities/question_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'q_and_answer_widget.dart';
@@ -18,7 +19,7 @@ class _AnswerCardState extends State<AnswerCard> {
       child: Card(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8),
-          child: QAndAnswerWidget(),
+          child: SizedBox()//QAndAnswerWidget(questionEntity: ,),
         ),
       ),
     );
