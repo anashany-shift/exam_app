@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class HeaderOfQuestion extends StatelessWidget {
   const HeaderOfQuestion({
-    super.key,
+    super.key, required this.header,
     
   });
-
+final String header;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class HeaderOfQuestion extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Select the correctly punctuated sentence.",
+         header,
           style: theme.textTheme.titleMedium,
         ),
       ],

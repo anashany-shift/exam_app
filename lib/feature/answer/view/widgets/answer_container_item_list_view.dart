@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../exam/domain/entities/answer_entity.dart';
 import 'answer_container_item.dart';
 
 class AnswerContainerItemListView extends StatefulWidget {
-  const AnswerContainerItemListView({super.key});
-
+  const AnswerContainerItemListView({super.key, required this.answers});
+  final List<AnswerEntity> answers;
   @override
   State<AnswerContainerItemListView> createState() => _AnswerContainerItemListViewState();
 }
@@ -17,8 +18,9 @@ class _AnswerContainerItemListViewState extends State<AnswerContainerItemListVie
     return  ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 4,
+      itemCount:widget.answers.length ,
       itemBuilder: (context, index) {
+        final answer = widget.answers[index];
         return GestureDetector(
             onTap: (){
               setState(() {
@@ -27,7 +29,7 @@ class _AnswerContainerItemListViewState extends State<AnswerContainerItemListVie
               });
             },
 
-            child: AnswersContainerItem(isSelected:selectedIndex==index));
+            child: AnswersContainerItem(isSelected:selectedIndex==index,text: answer.answer??'',));
       },
     );
   }
