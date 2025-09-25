@@ -12,27 +12,25 @@ import 'custom_alert_dialog.dart';
 import 'exam_view_header.dart';
 import 'progress_indicator_widget.dart';
 
-class ExamViewBody extends StatefulWidget {
+class ExamViewBody extends StatelessWidget {
   const ExamViewBody({super.key});
 
   @override
-  State<ExamViewBody> createState() => _ExamViewBodyState();
-}
-
-class _ExamViewBodyState extends State<ExamViewBody> {
-  late PageController _pageController;
-  int currentPage = 0;
-  bool _isDialogShown = false;
-
-  @override
-  PageController initState() {
-    super.initState();
-    return _pageController = PageController();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExamCubit, ExamState>(
+    final cubit = context.read<ExamCubit>();
+
+    return BlocConsumer<ExamCubit, ExamState>(
+      listener: (context, state) {
+        if (state is QuestionSuccess && state.examFinished) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) => const CustomAlertDialog(),
+            );
+          });
+        }
+      },
       builder: (context, state) {
         switch (state) {
           case ExamInitial():
@@ -44,15 +42,19 @@ class _ExamViewBodyState extends State<ExamViewBody> {
           case QuestionSuccess():
             final questions = state.questions;
             final totalQuestions = questions.length;
-            final duration = state.examInfoEntity.duration??0;
+            final duration = state.examInfoEntity.duration ?? 0;
+            final currentPage = state.currentPage;
             double progress = (currentPage + 1) / totalQuestions;
 
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
+              padding: const EdgeInsets.symmetric(
+                vertical: 20.0,
+                horizontal: 16,
+              ),
               child: Column(
                 children: [
                   ExamViewHeader(
-                    onTimeFinish: showExamFinishDialog,
+                    onTimeFinish: cubit.finishExam,
                     duration: duration,
                   ),
                   SizedBox(height: 20.h),
@@ -65,13 +67,9 @@ class _ExamViewBodyState extends State<ExamViewBody> {
                   Expanded(
                     child: PageView.builder(
                       physics: const NeverScrollableScrollPhysics(),
-                      controller: _pageController,
+                      controller: cubit.pageController,
+                      onPageChanged: cubit.onPageChanged,
                       itemCount: totalQuestions,
-                      onPageChanged: (index) {
-                        setState(() {
-                          currentPage = index;
-                        });
-                      },
                       itemBuilder: (context, index) {
                         return QAndAnswerWidget(
                           questionEntity: questions[index],
@@ -89,7 +87,7 @@ class _ExamViewBodyState extends State<ExamViewBody> {
                             backgroundColor: Colors.white,
                             textColor: AppColors.blue,
                             text: "Back",
-                            onPressed: previousPageFun,
+                            onPressed: cubit.previousPage,
                           ),
                         ),
                       ),
@@ -99,7 +97,7 @@ class _ExamViewBodyState extends State<ExamViewBody> {
                           buttonModel: ButtonModel(
                             borderRadius: 10,
                             text: "Next",
-                            onPressed: () => nextPageFun(totalQuestions),
+                            onPressed: cubit.nextPage,
                           ),
                         ),
                       ),
@@ -111,40 +109,5 @@ class _ExamViewBodyState extends State<ExamViewBody> {
         }
       },
     );
-  }
-
-
-
-void nextPageFun(int totalQuestions) {
-  if (currentPage < totalQuestions - 1) {
-    _pageController.nextPage(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  } else if (currentPage == totalQuestions - 1) {
-    showExamFinishDialog();
-  }
-}
-
-void previousPageFun() {
-  if (currentPage > 0) {
-    _pageController.previousPage(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
-}
-
-void showExamFinishDialog() {
-    if (!_isDialogShown) {
-      _isDialogShown = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showDialog(
-          context: context,
-          barrierDismissible: false, // ممنوع يتقفل بالضغط برا
-          builder: (_) => const CustomAlertDialog(),
-        );
-      });
-    }
   }
 }

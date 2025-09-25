@@ -1,7 +1,5 @@
-import 'package:exam_app/feature/exam/domain/entities/question_entity.dart';
 import 'package:flutter/material.dart';
 
-import 'q_and_answer_widget.dart';
 
 
 class AnswerCard extends StatefulWidget {
