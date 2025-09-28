@@ -32,7 +32,6 @@ class AnswersContainerItem extends StatelessWidget {
           child: Row(
             children: [
               Checkbox(
-                
                 value: isSelected, onChanged: (value) {}),
               SizedBox(width: 8.w,),
               Text(text,style: theme.textTheme.bodyMedium,)

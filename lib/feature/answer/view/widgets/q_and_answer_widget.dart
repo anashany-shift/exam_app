@@ -18,7 +18,7 @@ class QAndAnswerWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
         HeaderOfQuestion(header: questionEntity.question??"", ),
-        AnswerContainerItemListView(answers: questionEntity.answers??[]),
+        AnswerContainerItemListView(answersEntity: questionEntity.answers??[],questionId: questionEntity.id??"",),
 ]);
   }
 }

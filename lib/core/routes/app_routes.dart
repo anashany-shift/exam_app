@@ -3,6 +3,7 @@ import 'package:exam_app/feature/auth/forget_password/presentation/view_model/fo
 import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart';
 import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/exam_cubit.dart';
+import 'package:exam_app/feature/exam/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
 import 'package:exam_app/feature/subject/domain/entities/subject_exam_entity.dart';
 import 'package:exam_app/feature/subject/presentation/view_model/subject_exam_cubit.dart';
@@ -73,7 +74,8 @@ abstract class AppRoutes {
         final examId=settings.arguments as String;
         return MaterialPageRoute(builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => getIt.get<ExamCubit>()..getQuestions(examId: examId),)
+              BlocProvider(create: (context) => getIt.get<ExamCubit>()..getQuestions(examId: examId),),
+              BlocProvider(create: (context) => getIt.get<TimerCubit>(),)
 
             ],
             child: const ExamView()));

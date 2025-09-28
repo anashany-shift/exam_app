@@ -33,6 +33,7 @@ class ExamCubit extends Cubit<ExamState> {
                 examInfoEntity: result.data.first.examInfoEntity!,
               ),
             );
+
           } else {
             emit(QuestionError("No exam info or questions found"));
           }
@@ -76,7 +77,7 @@ class ExamCubit extends Cubit<ExamState> {
     }
   }
 
-   void finishExam() {
+  void finishExam() {
     if (state is QuestionSuccess) {
       final currentState = state as QuestionSuccess;
       if (!currentState.examFinished) {
@@ -84,6 +85,40 @@ class ExamCubit extends Cubit<ExamState> {
       }
     }
   }
+
+  void selectedAnswer({required String questionId, required String answerKey}) {
+    if (state is QuestionSuccess) {
+      final currentState = state as QuestionSuccess;
+      final updatedAnswers = Map<String, String>.from(
+        currentState.selectedAnswers,
+      );
+      updatedAnswers[questionId] = answerKey;
+      print("✅ Stored answers: $updatedAnswers");
+      emit(currentState.copyWith(selectedAnswers: updatedAnswers));
+    }
+  }
+
+  Map<String, dynamic> buildSubmitPayload(int timeTaken) {
+    if (state is QuestionSuccess) {
+      final currentState = state as QuestionSuccess;
+
+      final answersList = currentState.selectedAnswers.entries.map((entry) {
+        return {
+          "questionId": entry.key,
+          "correct": entry.value,
+        };
+      }).toList();
+
+      return {
+        "answers": answersList,
+        "time": timeTaken,
+      };
+    }
+    return {};
+  }
+
+
+
   @override
   Future<void> close() {
     pageController.dispose();

@@ -21,7 +21,9 @@ class SubjectCardListView extends StatelessWidget {
                  return  SubjectCardItem(subject:subject[index]);
                },);
         }else if(state is SubjectExploreError){
-          return const Center(child: Text("not found"));
+          return  Center(child: Text(
+            state.errorMessage
+          ));
         }else {
           return const CustomProgressIndicator();
         }

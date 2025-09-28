@@ -61,6 +61,8 @@ import '../../feature/exam/data/repo_impl/exam_repo_impl.dart' as _i304;
 import '../../feature/exam/domain/repo/exam_repo.dart' as _i903;
 import '../../feature/exam/domain/useCases/get_question_useCase.dart' as _i495;
 import '../../feature/exam/presentation/view_model/exam_cubit.dart' as _i497;
+import '../../feature/exam/presentation/view_model/timer_cubit/timer_cubit.dart'
+    as _i482;
 import '../../feature/main_layout/explore/api/client/subjects_api_client.dart'
     as _i45;
 import '../../feature/main_layout/explore/api/datasource_impl/subjects_remote_data_source_impl.dart'
@@ -98,6 +100,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
+    gh.factory<_i482.TimerCubit>(() => _i482.TimerCubit());
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.factory<_i585.ForgetPasswordApiClient>(
       () => _i585.ForgetPasswordApiClient.new(gh<_i361.Dio>()),

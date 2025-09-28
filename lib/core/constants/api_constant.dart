@@ -8,5 +8,6 @@ abstract class ApiConstant{
   static const getAllSubjectsEndPoint="subjects";
   static const getExamBySubjectsIdEndPoint="exams";
   static const getQuestionByExamIdEndPoint="questions";
+  static const checkQuestionEndPoint="questions/check";
 
 }
