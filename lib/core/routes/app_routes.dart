@@ -3,6 +3,7 @@ import 'package:exam_app/feature/auth/forget_password/presentation/view_model/fo
 import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart';
 import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/exam_cubit.dart';
+import 'package:exam_app/feature/exam/presentation/view_model/reult_cubit/result_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
 import 'package:exam_app/feature/subject/domain/entities/subject_exam_entity.dart';
@@ -14,6 +15,7 @@ import '../../feature/answer/view/answer_view.dart';
 import '../../feature/auth/forget_password/presentation/view/forget_password_view.dart';
 import '../../feature/auth/login/presentation/view/login_view.dart';
 import '../../feature/auth/sign_up/view/sign_up_view.dart';
+import '../../feature/exam/data/models/requests/check_question_request.dart';
 import '../../feature/exam/exam_soccer/view/exam_score_view.dart';
 import '../../feature/exam/presentation/view/exam_view.dart';
 import '../../feature/main_layout/main_layout_view.dart';
@@ -61,32 +63,46 @@ abstract class AppRoutes {
         final subjectId = settings.arguments as String;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt.get<SubjectExamCubit>()..getSubjectExam(subjectId),
+            create: (context) =>
+                getIt.get<SubjectExamCubit>()..getSubjectExam(subjectId),
             child: SubjectView(subjectId: subjectId),
           ),
         );
       case Routes.subjectDetails:
-
-        return MaterialPageRoute(builder: (_) =>  SubjectDetailsView(
-           subjectExamEntity : settings.arguments as SubjectExamEntity,
-        ));
+        return MaterialPageRoute(
+          builder: (_) => SubjectDetailsView(
+            subjectExamEntity: settings.arguments as SubjectExamEntity,
+          ),
+        );
       case Routes.exam:
-        final examId=settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => MultiBlocProvider(
+        final examId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => getIt.get<ExamCubit>()..getQuestions(examId: examId),),
-              BlocProvider(create: (context) => getIt.get<TimerCubit>(),)
-
+              BlocProvider(
+                create: (context) =>
+                    getIt.get<ExamCubit>()..getQuestions(examId: examId),
+              ),
+              BlocProvider(create: (context) => getIt.get<TimerCubit>()),
+              BlocProvider(create: (context) => getIt.get<ResultCubit>()),
             ],
-            child: const ExamView()));
+            child: const ExamView(),
+          ),
+        );
+      case Routes.examScore:
+        final request = settings.arguments as CheckQuestionRequest;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<ResultCubit>()..checkQuestion(request),
+            child: const ExamScoreView(),
+          ),
+        );
+    // Define your routes here
       case Routes.resetPassword:
         return MaterialPageRoute(builder: (_) => const ResetPasswordView());
       case Routes.answer:
         return MaterialPageRoute(builder: (_) => const AnswerView());
-      case Routes.examScore:
-        return MaterialPageRoute(builder: (_) => const ExamScoreView());
 
-      // Define your routes here
       default:
         return MaterialPageRoute(
           builder: (_) =>

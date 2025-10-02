@@ -1,4 +1,7 @@
+import 'package:exam_app/core/widget/custom_progress_indicator.dart';
+import 'package:exam_app/feature/exam/presentation/view_model/reult_cubit/result_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'chart_widget.dart';
@@ -11,10 +14,6 @@ class ScoreSection extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    int correct = 18;
-    int incorrect = 2;
-    int total = correct + incorrect;
-    double percentage = (correct / total) * 100;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,12 +21,27 @@ class ScoreSection extends StatelessWidget {
         Text("Your score", style: theme.textTheme.titleMedium),
         SizedBox(height: 24.h),
 
-        Row(
-          children: [
-            ChartWidget(percentage: percentage ),
-            SizedBox(width: 24.w),
-            const CorrectItemSection(),
-          ],
+        BlocBuilder<ResultCubit, ResultState>(
+          builder: (context, state) {
+            switch(state){
+
+              case ResultInitial():
+              case CheckQuestionLoading():
+              return const CustomProgressIndicator();
+              case CheckQuestionSuccess():
+                final checkQuestionState=state.checkQuestionEntity;
+                return Row(
+                  children: [
+                    ChartWidget(percentage:checkQuestionState),
+                    SizedBox(width: 24.w),
+                     CorrectItemSection(checkQuestionEntity: checkQuestionState,),
+                  ],
+                );
+              case CheckQuestionError():
+              return Text(state.errorMessage);
+            }
+
+          },
         ),
       ],
     );

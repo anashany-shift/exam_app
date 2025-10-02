@@ -6,6 +6,9 @@ import 'package:exam_app/feature/exam/domain/useCases/get_question_useCase.dart'
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../data/models/requests/answer_question_request.dart';
+import '../../data/models/requests/check_question_request.dart';
+
 
 part 'exam_state.dart';
 
@@ -98,25 +101,24 @@ class ExamCubit extends Cubit<ExamState> {
     }
   }
 
-  Map<String, dynamic> buildSubmitPayload(int timeTaken) {
+  CheckQuestionRequest buildCheckQuestionRequest(int timeTaken) {
     if (state is QuestionSuccess) {
       final currentState = state as QuestionSuccess;
 
       final answersList = currentState.selectedAnswers.entries.map((entry) {
-        return {
-          "questionId": entry.key,
-          "correct": entry.value,
-        };
+        return AnswersQuestionRequest(
+          questionId: entry.key,
+          correct: entry.value,
+        );
       }).toList();
 
-      return {
-        "answers": answersList,
-        "time": timeTaken,
-      };
+      return CheckQuestionRequest(
+        answers: answersList,
+        time: timeTaken,
+      );
     }
-    return {};
+    return CheckQuestionRequest(answers: [], time: timeTaken);
   }
-
 
 
   @override

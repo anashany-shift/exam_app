@@ -20,6 +20,10 @@ class ExamScoreViewBody extends StatelessWidget {
           const CustomAppBar(title: "Exam Score"),
           SizedBox(height: 40.h),
           const ScoreSection(),
+
+
+
+
           SizedBox(height: 80.h),
           CustomButton(
             buttonModel: ButtonModel(

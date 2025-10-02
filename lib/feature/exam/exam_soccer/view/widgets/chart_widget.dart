@@ -1,3 +1,4 @@
+import 'package:exam_app/feature/exam/domain/entities/check_question_entity.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +7,17 @@ import '../../../../../../core/utils/app_colors.dart';
 class ChartWidget extends StatelessWidget {
   const ChartWidget({super.key, required this.percentage,});
 
-  final double percentage;
+  final CheckQuestionEntity percentage;
 
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+
+    String raw = percentage.total ?? "0";
+    String cleaned = raw.replaceAll("%", "").trim();
+    double value = double.tryParse(cleaned) ?? 0;
+    String displayValue = "${value.toStringAsFixed(0)}%";
 
     return Row(
       children: [
@@ -29,13 +35,13 @@ class ChartWidget extends StatelessWidget {
                   sections: [
                     PieChartSectionData(
                       color: AppColors.blue,
-                      value: percentage,
+                      value: value,
                       radius: 8,
                       showTitle: false,
                     ),
                     PieChartSectionData(
                       color: AppColors.red,
-                      value: 100 - percentage,
+                      value: 100-value,
                       radius: 8,
                       showTitle: false,
 
@@ -48,7 +54,7 @@ class ChartWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "${percentage.toStringAsFixed(0)}%",
+                displayValue,
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,

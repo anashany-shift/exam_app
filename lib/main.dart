@@ -2,15 +2,25 @@ import 'package:bloc/bloc.dart';
 import 'package:exam_app/bloc_observer.dart';
 import 'package:exam_app/core/helper/token_storage.dart';
 import 'package:exam_app/core/routes/app_routes.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/config/di.dart';
 import 'core/routes/routes.dart';
 import 'core/theme/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
   WidgetsFlutterBinding.ensureInitialized();
 
   configureDependencies();

@@ -59,8 +59,12 @@ import '../../feature/exam/data/datasource/exam_remote_datasource.dart'
     as _i936;
 import '../../feature/exam/data/repo_impl/exam_repo_impl.dart' as _i304;
 import '../../feature/exam/domain/repo/exam_repo.dart' as _i903;
+import '../../feature/exam/domain/useCases/check_question_use_case.dart'
+    as _i408;
 import '../../feature/exam/domain/useCases/get_question_useCase.dart' as _i495;
 import '../../feature/exam/presentation/view_model/exam_cubit.dart' as _i497;
+import '../../feature/exam/presentation/view_model/reult_cubit/result_cubit.dart'
+    as _i1044;
 import '../../feature/exam/presentation/view_model/timer_cubit/timer_cubit.dart'
     as _i482;
 import '../../feature/main_layout/explore/api/client/subjects_api_client.dart'
@@ -91,6 +95,7 @@ import '../../feature/subject/domain/useCases/subject_exam_useCase.dart'
 import '../../feature/subject/presentation/view_model/subject_exam_cubit.dart'
     as _i757;
 import '../module/dio_module.dart' as _i545;
+import '../service/network_service.dart' as _i724;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -100,6 +105,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
+    gh.factory<_i724.NetworkService>(() => _i724.NetworkService());
     gh.factory<_i482.TimerCubit>(() => _i482.TimerCubit());
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.factory<_i585.ForgetPasswordApiClient>(
@@ -111,14 +117,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i48.SignupApiClient>(
       () => _i48.SignupApiClient.new(gh<_i361.Dio>()),
     );
+    gh.factory<_i716.ExamApiClient>(
+      () => _i716.ExamApiClient.new(gh<_i361.Dio>()),
+    );
     gh.factory<_i45.SubjectsApiClient>(
       () => _i45.SubjectsApiClient.new(gh<_i361.Dio>()),
     );
     gh.factory<_i1015.SubjectExamApiClient>(
       () => _i1015.SubjectExamApiClient.new(gh<_i361.Dio>()),
-    );
-    gh.factory<_i716.ExamApiClient>(
-      () => _i716.ExamApiClient.new(gh<_i361.Dio>()),
     );
     gh.factory<_i57.ForgetPasswordDataSource>(
       () => _i547.ForgetPasswordDataSourceImpl(
@@ -166,6 +172,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1030.SubjectExamUseCase>(
       () => _i1030.SubjectExamUseCase(gh<_i758.SubjectExamRepo>()),
     );
+    gh.factory<_i408.CheckQuestionUseCase>(
+      () => _i408.CheckQuestionUseCase(gh<_i903.ExamRepo>()),
+    );
     gh.factory<_i495.GetQuestionUseCase>(
       () => _i495.GetQuestionUseCase(gh<_i903.ExamRepo>()),
     );
@@ -199,8 +208,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i643.GetSubjectUseCase>(
       () => _i643.GetSubjectUseCase(gh<_i508.SubjectsRepo>()),
     );
+    gh.factory<_i1044.ResultCubit>(
+      () => _i1044.ResultCubit(gh<_i408.CheckQuestionUseCase>()),
+    );
     gh.factory<_i399.ExploreCubit>(
-      () => _i399.ExploreCubit(gh<_i643.GetSubjectUseCase>()),
+      () => _i399.ExploreCubit(
+        gh<_i643.GetSubjectUseCase>(),
+        gh<_i724.NetworkService>(),
+      ),
     );
     gh.factory<_i1049.SignupUseCase>(
       () => _i1049.SignupUseCase(gh<_i53.SignupRepo>()),

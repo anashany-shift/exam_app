@@ -1,4 +1,8 @@
+import 'package:exam_app/feature/exam/domain/entities/check_question_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'check_correct_question_dto.dart';
+import 'check_wrong_question_dto.dart';
 
 part 'check_question_response.g.dart';
 
@@ -13,9 +17,9 @@ class CheckQuestionResponse {
   @JsonKey(name: "total")
   final String? total;
   @JsonKey(name: "WrongQuestions")
-  final List<WrongQuestion>? wrongQuestions;
+  final List<CheckWrongQuestionDto>? wrongQuestions;
   @JsonKey(name: "correctQuestions")
-  final List<CorrectQuestion>? correctQuestions;
+  final List<CheckCorrectQuestionDto>? correctQuestions;
 
   CheckQuestionResponse({
     this.message,
@@ -32,53 +36,8 @@ class CheckQuestionResponse {
   Map<String, dynamic> toJson() => _$CheckQuestionResponseToJson(this);
 }
 
-@JsonSerializable()
-class WrongQuestion {
-  @JsonKey(name: "QID")
-  final String? qid;
-  @JsonKey(name: "Question")
-  final String? question;
-  @JsonKey(name: "inCorrectAnswer")
-  final String? inCorrectAnswer;
-  @JsonKey(name: "correctAnswer")
-  final String? correctAnswer;
-  @JsonKey(name: "answers")
-  final Map<String, dynamic>? answers;
-
-  WrongQuestion({
-    this.qid,
-    this.question,
-    this.inCorrectAnswer,
-    this.correctAnswer,
-    this.answers,
-  });
-
-  factory WrongQuestion.fromJson(Map<String, dynamic> json) =>
-      _$WrongQuestionFromJson(json);
-
-  Map<String, dynamic> toJson() => _$WrongQuestionToJson(this);
-}
-
-@JsonSerializable()
-class CorrectQuestion {
-  @JsonKey(name: "QID")
-  final String? qid;
-  @JsonKey(name: "Question")
-  final String? question;
-  @JsonKey(name: "correctAnswer")
-  final String? correctAnswer;
-  @JsonKey(name: "answers")
-  final Map<String, dynamic>? answers;
-
-  CorrectQuestion({
-    this.qid,
-    this.question,
-    this.correctAnswer,
-    this.answers,
-  });
-
-  factory CorrectQuestion.fromJson(Map<String, dynamic> json) =>
-      _$CorrectQuestionFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CorrectQuestionToJson(this);
+extension CheckQuestionResponseMapper on CheckQuestionResponse {
+  CheckQuestionEntity toEntity() {
+    return CheckQuestionEntity(correct: correct, wrong: wrong, total: total);
+  }
 }

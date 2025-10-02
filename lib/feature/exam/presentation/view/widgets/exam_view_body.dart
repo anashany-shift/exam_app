@@ -1,3 +1,4 @@
+import 'package:exam_app/core/routes/routes.dart';
 import 'package:exam_app/core/widget/custom_progress_indicator.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/exam_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/timer_cubit/timer_cubit.dart';
@@ -23,12 +24,19 @@ class ExamViewBody extends StatelessWidget {
       child: BlocConsumer<ExamCubit, ExamState>(
         listener: (context, state) {
           if (state is QuestionSuccess && state.examFinished) {
-            context.read<TimerCubit>().stop();
+              context.read<TimerCubit>().stop();
             WidgetsBinding.instance.addPostFrameCallback((_) {
               showDialog(
                 context: context,
                 barrierDismissible: false,
-                builder: (_) => const CustomAlertDialog(),
+                builder: (_) => CustomAlertDialog(onPressed: (){
+                  final examCubit = context.read<ExamCubit>();
+                  final timerCubit = context.read<TimerCubit>();
+                  final request = examCubit.buildCheckQuestionRequest(timerCubit.timeTaken);
+                  Navigator.pushNamed(context, Routes.examScore,arguments: request);
+
+
+                },),
               );
             });
           }
