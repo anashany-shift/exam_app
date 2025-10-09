@@ -6,6 +6,7 @@ import 'package:exam_app/feature/exam/presentation/view_model/exam_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/reult_cubit/result_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
+import 'package:exam_app/feature/main_layout/profile/view/view_model/profile_cubit.dart';
 import 'package:exam_app/feature/subject/domain/entities/subject_exam_entity.dart';
 import 'package:exam_app/feature/subject/presentation/view_model/subject_exam_cubit.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,11 @@ abstract class AppRoutes {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => getIt.get<ExploreCubit>()..getSubjects(),
+                create: (context) => getIt.get<ExploreCubit>(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    getIt.get<ProfileCubit>()..getProfileData(),
               ),
             ],
             child: const MainLayoutView(),
@@ -93,13 +98,19 @@ abstract class AppRoutes {
         final request = settings.arguments as CheckQuestionRequest;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt.get<ResultCubit>()..checkQuestion(request),
+            create: (context) =>
+                getIt.get<ResultCubit>()..checkQuestion(request),
             child: const ExamScoreView(),
           ),
         );
-    // Define your routes here
+      // Define your routes here
       case Routes.resetPassword:
-        return MaterialPageRoute(builder: (_) => const ResetPasswordView());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt.get<ProfileCubit>(),
+            child: const ResetPasswordView(),
+          ),
+        );
       case Routes.answer:
         return MaterialPageRoute(builder: (_) => const AnswerView());
 

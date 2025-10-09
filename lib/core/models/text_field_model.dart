@@ -11,6 +11,7 @@ class TextFormFieldModel {
   final void Function(String)? onChanged;
   final double? border;
   final TextEditingController? controller;
+  final bool readOnly;
 
   TextFormFieldModel({
     this.suffixIcon,
@@ -23,5 +24,6 @@ class TextFormFieldModel {
     this.validator,
     this.onChanged,
     this.obscureText = false,
+    this.readOnly=false
   });
 }

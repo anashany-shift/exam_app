@@ -48,6 +48,37 @@ class ExamCubit extends Cubit<ExamState> {
     }
   }
 
+
+  void selectedAnswer({required String questionId, required String answerKey}) {
+    if (state is QuestionSuccess) {
+      final currentState = state as QuestionSuccess;
+      final updatedAnswers = Map<String, String>.from(
+        currentState.selectedAnswers,
+      );
+      updatedAnswers[questionId] = answerKey;
+      print("✅ Stored answers: $updatedAnswers");
+      emit(currentState.copyWith(selectedAnswers: updatedAnswers));
+    }
+  }
+
+  CheckQuestionRequest buildCheckQuestionRequest(int timeTaken) {
+    if (state is QuestionSuccess) {
+      final currentState = state as QuestionSuccess;
+
+      final answersList = currentState.selectedAnswers.entries.map((entry) {
+        return AnswersQuestionRequest(
+          questionId: entry.key,
+          correct: entry.value,
+        );
+      }).toList();
+
+      return CheckQuestionRequest(
+        answers: answersList,
+        time: timeTaken,
+      );
+    }
+    return CheckQuestionRequest(answers: [], time: timeTaken);
+  }
   void nextPage() {
     if (state is QuestionSuccess) {
       final currentState = state as QuestionSuccess;
@@ -87,37 +118,6 @@ class ExamCubit extends Cubit<ExamState> {
         emit(currentState.copyWith(examFinished: true));
       }
     }
-  }
-
-  void selectedAnswer({required String questionId, required String answerKey}) {
-    if (state is QuestionSuccess) {
-      final currentState = state as QuestionSuccess;
-      final updatedAnswers = Map<String, String>.from(
-        currentState.selectedAnswers,
-      );
-      updatedAnswers[questionId] = answerKey;
-      print("✅ Stored answers: $updatedAnswers");
-      emit(currentState.copyWith(selectedAnswers: updatedAnswers));
-    }
-  }
-
-  CheckQuestionRequest buildCheckQuestionRequest(int timeTaken) {
-    if (state is QuestionSuccess) {
-      final currentState = state as QuestionSuccess;
-
-      final answersList = currentState.selectedAnswers.entries.map((entry) {
-        return AnswersQuestionRequest(
-          questionId: entry.key,
-          correct: entry.value,
-        );
-      }).toList();
-
-      return CheckQuestionRequest(
-        answers: answersList,
-        time: timeTaken,
-      );
-    }
-    return CheckQuestionRequest(answers: [], time: timeTaken);
   }
 
 

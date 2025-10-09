@@ -9,5 +9,8 @@ abstract class ApiConstant{
   static const getExamBySubjectsIdEndPoint="exams";
   static const getQuestionByExamIdEndPoint="questions";
   static const checkQuestionEndPoint="questions/check";
+  static const getProfileDataEndPoint="auth/profileData";
+  static const editProfileDataEndPoint="auth/editProfile";
+  static const changePasswordEndPoint="auth/changePassword";
 
 }

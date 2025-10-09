@@ -46,7 +46,7 @@ class ExamRepoImpl implements ExamRepo {
       final checkQuestionResponse = await examRemoteDataSource.checkQuestions(
         checkQuestionRequest: checkQuestionRequest,
       );
-      final checkQuestionEntity=checkQuestionResponse.toEntity();
+      final checkQuestionEntity = checkQuestionResponse.toEntity();
       return ApiSuccessResult(checkQuestionEntity);
     } on Exception catch (e) {
       if (e is DioException) {
