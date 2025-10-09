@@ -10,40 +10,31 @@ class AnswerContainerItemListView extends StatelessWidget {
     super.key,
     required this.answersEntity,
     required this.questionId,
+    required this.selectedAnswerKey,
+    this.onAnswerTapped,
   });
 
   final List<AnswerEntity> answersEntity;
   final String questionId;
+  final String? selectedAnswerKey;
+  final Function(String)? onAnswerTapped;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExamCubit, ExamState>(
-      builder: (context, state) {
-        if (state is! QuestionSuccess) {
-          return const SizedBox();
-        }
-
-        final selectedKey = state.selectedAnswers[questionId];
-
-        return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: answersEntity.length,
-          itemBuilder: (context, index) {
-            final answer = answersEntity[index];
-            return GestureDetector(
-              onTap: () {
-                context.read<ExamCubit>().selectedAnswer(
-                  questionId: questionId,
-                  answerKey: answer.key ?? "",
-                );
-              },
-              child: AnswersContainerItem(
-                isSelected: selectedKey == answer.key,
-                text: answer.answer ?? ''
-              ),
-            );
-          },
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: answersEntity.length,
+      itemBuilder: (context, index) {
+        final answer = answersEntity[index];
+        return GestureDetector(
+          onTap: onAnswerTapped != null
+              ? () => onAnswerTapped!(answer.key ?? "")
+              : null,
+          child: AnswersContainerItem(
+            isSelected: selectedAnswerKey == answer.key,
+            text: answer.answer ?? '',
+          ),
         );
       },
     );

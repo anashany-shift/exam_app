@@ -32,9 +32,27 @@ class ExamViewBody extends StatelessWidget {
                 builder: (_) => CustomAlertDialog(onPressed: (){
                   final examCubit = context.read<ExamCubit>();
                   final timerCubit = context.read<TimerCubit>();
-                  final request = examCubit.buildCheckQuestionRequest(timerCubit.timeTaken);
-                  Navigator.pushNamed(context, Routes.examScore,arguments: request);
+                  if (examCubit.state is QuestionSuccess) {
+                    final currentState = examCubit.state as QuestionSuccess;
+                    final request = examCubit.buildCheckQuestionRequest(timerCubit.timeTaken);
+                    final questions = currentState.questions;
+                    final selectedAnswers = currentState.selectedAnswers;
+                    final examId = currentState.examInfoEntity.examId;
 
+                    final arguments = {
+                      'request': request,
+                      'questions': questions,
+                      'selectedAnswers': selectedAnswers,
+                      'examId': examId,
+                    };
+
+                    // 3. انتقل إلى شاشة النتيجة مع كل البيانات
+                    Navigator.pushReplacementNamed(
+                      context,
+                      Routes.examScore,
+                      arguments: arguments,
+                    );
+                  }
 
                 },),
               );

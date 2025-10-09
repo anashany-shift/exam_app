@@ -17,6 +17,7 @@ import '../../feature/auth/forget_password/presentation/view/forget_password_vie
 import '../../feature/auth/login/presentation/view/login_view.dart';
 import '../../feature/auth/sign_up/view/sign_up_view.dart';
 import '../../feature/exam/data/models/requests/check_question_request.dart';
+import '../../feature/exam/domain/entities/question_entity.dart';
 import '../../feature/exam/exam_soccer/view/exam_score_view.dart';
 import '../../feature/exam/presentation/view/exam_view.dart';
 import '../../feature/main_layout/main_layout_view.dart';
@@ -95,12 +96,21 @@ abstract class AppRoutes {
           ),
         );
       case Routes.examScore:
-        final request = settings.arguments as CheckQuestionRequest;
+        final args = settings.arguments as Map<String, dynamic>;
+        final request = args['request'] as CheckQuestionRequest;
+        final questions = args['questions'] as List<QuestionEntity>;
+        final selectedAnswers = args['selectedAnswers'] as Map<String, String>;
+        final examId = args['examId'] as String;
+
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) =>
                 getIt.get<ResultCubit>()..checkQuestion(request),
-            child: const ExamScoreView(),
+            child:  ExamScoreView(
+              questions: questions,
+              selectedAnswers: selectedAnswers,
+              examId: examId,
+            ),
           ),
         );
       // Define your routes here
@@ -112,7 +122,12 @@ abstract class AppRoutes {
           ),
         );
       case Routes.answer:
-        return MaterialPageRoute(builder: (_) => const AnswerView());
+        final args = settings.arguments as Map<String, dynamic>;
+
+        final questions = args['questions'] as List<QuestionEntity>;
+        final selectedAnswers = args['selectedAnswers'] as Map<String, String>;
+
+        return MaterialPageRoute(builder: (_) =>  AnswerView(questions:questions, selectedAnswers:selectedAnswers));
 
       default:
         return MaterialPageRoute(
