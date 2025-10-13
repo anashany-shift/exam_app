@@ -6,6 +6,8 @@ import 'package:exam_app/feature/exam/domain/useCases/check_question_use_case.da
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
+import '../../../domain/entities/question_entity.dart';
+
 part 'result_state.dart';
 @injectable
 class ResultCubit extends Cubit<ResultState> {
@@ -14,12 +16,16 @@ class ResultCubit extends Cubit<ResultState> {
 
   
   
-  Future<void>checkQuestion(CheckQuestionRequest request)async{
+  Future<void>checkQuestion({
+    required CheckQuestionRequest request,
+    required List<QuestionEntity> questions, // أضف هذا
+  })async{
     emit(CheckQuestionLoading());
     try {
 
       var result=await checkQuestionUseCase.call(
-        checkQuestionRequest: request
+        checkQuestionRequest: request,
+        questions: questions
       );
       switch (result) {
         case ApiSuccessResult <CheckQuestionEntity>():

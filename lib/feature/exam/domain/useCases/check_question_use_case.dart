@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../data/models/requests/check_question_request.dart';
 import '../entities/check_question_entity.dart';
+import '../entities/question_entity.dart';
 
 @injectable
 class CheckQuestionUseCase{
@@ -11,7 +12,7 @@ class CheckQuestionUseCase{
 
   CheckQuestionUseCase(this.examRepo);
 
-  Future<ApiResult<CheckQuestionEntity>>call({required CheckQuestionRequest checkQuestionRequest})async{
-    return await examRepo.checkQuestion(checkQuestionRequest: checkQuestionRequest);
+  Future<ApiResult<CheckQuestionEntity>>call({required CheckQuestionRequest checkQuestionRequest,required List<QuestionEntity> questions, })async{
+    return await examRepo.checkQuestion(checkQuestionRequest: checkQuestionRequest, questions: questions);
   }
 }

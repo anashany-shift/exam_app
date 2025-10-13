@@ -7,7 +7,11 @@ part of 'verify_code_response.dart';
 // **************************************************************************
 
 VerifyCodeResponse _$VerifyCodeResponseFromJson(Map<String, dynamic> json) =>
-    VerifyCodeResponse(status: json['status'] as String?);
+    VerifyCodeResponse(
+      status: json['status'] as String?,
+    );
 
 Map<String, dynamic> _$VerifyCodeResponseToJson(VerifyCodeResponse instance) =>
-    <String, dynamic>{'status': instance.status};
+    <String, dynamic>{
+      'status': instance.status,
+    };

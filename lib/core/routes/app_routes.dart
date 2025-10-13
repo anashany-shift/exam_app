@@ -3,6 +3,7 @@ import 'package:exam_app/feature/auth/forget_password/presentation/view_model/fo
 import 'package:exam_app/feature/auth/login/presentation/view_model/login_cubit.dart';
 import 'package:exam_app/feature/auth/sign_up/view/view_model/signup_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/exam_cubit.dart';
+import 'package:exam_app/feature/exam/presentation/view_model/result_history_cubit/result_history_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/reult_cubit/result_cubit.dart';
 import 'package:exam_app/feature/exam/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:exam_app/feature/main_layout/explore/presentation/view_model/explore_cubit.dart';
@@ -61,6 +62,8 @@ abstract class AppRoutes {
                 create: (context) =>
                     getIt.get<ProfileCubit>()..getProfileData(),
               ),
+              BlocProvider(create: (context) => getIt.get<ResultHistoryCubit>()..loadCompletedExams()),
+
             ],
             child: const MainLayoutView(),
           ),
@@ -105,7 +108,7 @@ abstract class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) =>
-                getIt.get<ResultCubit>()..checkQuestion(request),
+                getIt.get<ResultCubit>()..checkQuestion(request: request, questions: questions),
             child:  ExamScoreView(
               questions: questions,
               selectedAnswers: selectedAnswers,
