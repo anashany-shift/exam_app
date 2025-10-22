@@ -16,4 +16,9 @@ class ExamLocalDataSource {
     final box = Hive.box<CompletedExam>(_boxName);
     return box.values.toList();
   }
+  Future<void>deleteAllCompletedExam()async{
+    final box = Hive.box<CompletedExam>(_boxName);
+    await box.clear();
+
+  }
 }

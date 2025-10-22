@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/config/di.dart';
 import '../../../exam/presentation/view_model/result_history_cubit/result_history_cubit.dart';
 
 class ResultView extends StatelessWidget {

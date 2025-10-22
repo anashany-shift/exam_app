@@ -20,7 +20,6 @@ class AnswersContainerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    // --- منطق تحديد الألوان للخلفية والإطار (زي ما هو) ---
     Color backgroundColor = AppColors.lightBlue;
     Color borderColor = Colors.transparent;
 
@@ -36,21 +35,16 @@ class AnswersContainerItem extends StatelessWidget {
       backgroundColor = isSelected ? AppColors.blue[10]! : AppColors.lightBlue;
     }
 
-    // --- START: منطق تحديد لون الـ Checkbox ---
-    Color checkboxActiveColor = AppColors.blue; // اللون الافتراضي في وضع الامتحان
+    Color checkboxActiveColor = AppColors.blue;
 
-    // لو إحنا في وضع المراجعة والمستخدم اختار الإجابة دي
     if (wasSelectedByUser == true) {
-      // لو كانت الإجابة صحيحة، خليه أخضر
       if (isCorrectAnswer == true) {
         checkboxActiveColor = AppColors.green;
       }
-      // لو كانت الإجابة خاطئة، خليه أحمر
       else {
         checkboxActiveColor = AppColors.red;
       }
     }
-    // --- END: منطق تحديد لون الـ Checkbox ---
 
 
     return Padding(
@@ -70,7 +64,6 @@ class AnswersContainerItem extends StatelessWidget {
             children: [
               Checkbox(
                 value: wasSelectedByUser ?? isSelected,
-                // --- استخدم اللون اللي حددناه هنا ---
                 activeColor: checkboxActiveColor,
                 onChanged: (value) {},
               ),

@@ -4,9 +4,6 @@ import 'package:exam_app/feature/exam/domain/entities/answer_entity.dart';
 import 'package:exam_app/feature/exam/domain/entities/check_question_entity.dart';
 import 'package:exam_app/feature/exam/data/models/completed_exam.dart'; // مسار ملف الـ Hive Models
 
-// =====================================================
-// ✅ QuestionEntity ↔ QuestionEntityHive
-// =====================================================
 
 extension QuestionEntityMapper on QuestionEntity {
   QuestionEntityHive toHive() {
@@ -33,9 +30,6 @@ extension QuestionEntityHiveMapper on QuestionEntityHive {
   }
 }
 
-// =====================================================
-// ✅ AnswerEntity ↔ AnswerEntityHive
-// =====================================================
 
 extension AnswerEntityMapper on AnswerEntity {
   AnswerEntityHive toHive() {
@@ -54,9 +48,6 @@ extension AnswerEntityHiveMapper on AnswerEntityHive {
   }
 }
 
-// =====================================================
-// ✅ ExamInfoEntity ↔ ExamInfoEntityHive
-// =====================================================
 
 extension ExamInfoEntityMapper on ExamInfoEntity {
   ExamInfoEntityHive toHive() {
@@ -79,9 +70,7 @@ extension ExamInfoEntityHiveMapper on ExamInfoEntityHive {
   }
 }
 
-// =====================================================
-// ✅ CheckQuestionEntity ↔ CheckQuestionEntityHive
-// =====================================================
+
 
 extension CheckQuestionEntityMapper on CheckQuestionEntity {
   CheckQuestionEntityHive toHive() {
@@ -102,9 +91,6 @@ extension CheckQuestionEntityHiveMapper on CheckQuestionEntityHive {
   }
 }
 
-// =====================================================
-// ✅ CompletedExam ↔ Entity Group
-// =====================================================
 
 class CompletedExamMapper {
   static CompletedExam toHive({
@@ -137,7 +123,6 @@ class CompletedExamMapper {
   }
 }
 
-/// ✅ DTO class لتجميع البيانات من Hive
 class CompletedExamData {
   final String examId;
   final String examName;

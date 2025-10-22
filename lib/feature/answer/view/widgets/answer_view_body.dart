@@ -41,17 +41,14 @@ class AnswerViewBody extends StatelessWidget {
                       children: [
                         HeaderOfQuestion(header: question.question ?? ""),
                         const SizedBox(height: 8),
-                        // عرض الإجابات
                         ...question.answers!.map((answer) {
                           final bool isCorrect = answer.key == question.correct;
                           final bool wasSelected = answer.key == userAnswerKey;
 
                           return AnswersContainerItem(
-                            text: "${answer.key}: ${answer.answer}",
-                            // --- تمرير الخصائص الجديدة هنا ---
+                            text: "${answer.answer}",
                             isCorrectAnswer: isCorrect,
                             wasSelectedByUser: wasSelected,
-                            // isSelected هنخليها false عشان دي في وضع المراجعة
                             isSelected: false,
                           );
                         }),

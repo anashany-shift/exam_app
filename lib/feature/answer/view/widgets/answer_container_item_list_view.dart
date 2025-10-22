@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../exam/domain/entities/answer_entity.dart';
-import '../../../exam/presentation/view_model/exam_cubit.dart';
 import 'answer_container_item.dart';
 
 class AnswerContainerItemListView extends StatelessWidget {
