@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return TextFormField(
+      readOnly: textFormFieldModel.readOnly,
       controller: textFormFieldModel.controller,
 
       autovalidateMode: AutovalidateMode.onUserInteraction,

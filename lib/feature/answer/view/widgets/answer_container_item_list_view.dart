@@ -3,33 +3,37 @@ import 'package:flutter/material.dart';
 import '../../../exam/domain/entities/answer_entity.dart';
 import 'answer_container_item.dart';
 
-class AnswerContainerItemListView extends StatefulWidget {
-  const AnswerContainerItemListView({super.key, required this.answers});
-  final List<AnswerEntity> answers;
-  @override
-  State<AnswerContainerItemListView> createState() => _AnswerContainerItemListViewState();
-}
+class AnswerContainerItemListView extends StatelessWidget {
+  const AnswerContainerItemListView({
+    super.key,
+    required this.answersEntity,
+    required this.questionId,
+    required this.selectedAnswerKey,
+    this.onAnswerTapped,
+  });
 
-class _AnswerContainerItemListViewState extends State<AnswerContainerItemListView> {
-  int selectedIndex=-1;
+  final List<AnswerEntity> answersEntity;
+  final String questionId;
+  final String? selectedAnswerKey;
+  final Function(String)? onAnswerTapped;
 
   @override
   Widget build(BuildContext context) {
-    return  ListView.builder(
+    return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount:widget.answers.length ,
+      itemCount: answersEntity.length,
       itemBuilder: (context, index) {
-        final answer = widget.answers[index];
+        final answer = answersEntity[index];
         return GestureDetector(
-            onTap: (){
-              setState(() {
-
-                selectedIndex=index;
-              });
-            },
-
-            child: AnswersContainerItem(isSelected:selectedIndex==index,text: answer.answer??'',));
+          onTap: onAnswerTapped != null
+              ? () => onAnswerTapped!(answer.key ?? "")
+              : null,
+          child: AnswersContainerItem(
+            isSelected: selectedAnswerKey == answer.key,
+            text: answer.answer ?? '',
+          ),
+        );
       },
     );
   }

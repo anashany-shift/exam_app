@@ -1,13 +1,13 @@
 import 'package:exam_app/core/models/button_model.dart';
-import 'package:exam_app/core/routes/routes.dart';
 import 'package:exam_app/core/utils/app_assets.dart';
 import 'package:exam_app/core/utils/app_colors.dart';
 import 'package:exam_app/core/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomAlertDialog extends StatelessWidget {
-  const CustomAlertDialog({super.key, this.text="time out"} );
+  const CustomAlertDialog({super.key, this.text="time out", required this.onPressed} );
   final String text ;
+  final  void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class CustomAlertDialog extends StatelessWidget {
             children: [
               Image.asset(
             AppAssets.sandClock,
-           
+
           ),
 
           // النص
@@ -53,10 +53,7 @@ class CustomAlertDialog extends StatelessWidget {
             child: CustomButton(
               buttonModel: ButtonModel(
                 text: "View score",
-                onPressed: () {
-
-                Navigator.pushNamed(context,Routes.examScore);
-                },
+                onPressed: onPressed
               ),
             ),
           ),

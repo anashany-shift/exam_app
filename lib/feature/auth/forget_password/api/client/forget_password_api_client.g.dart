@@ -2,16 +2,18 @@
 
 part of 'forget_password_api_client.dart';
 
-// dart format off
-
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _ForgetPasswordApiClient implements ForgetPasswordApiClient {
-  _ForgetPasswordApiClient(this._dio, {this.baseUrl, this.errorLogger});
+  _ForgetPasswordApiClient(
+    this._dio, {
+    this.baseUrl,
+    this.errorLogger,
+  });
 
   final Dio _dio;
 
@@ -21,23 +23,28 @@ class _ForgetPasswordApiClient implements ForgetPasswordApiClient {
 
   @override
   Future<ForgetPasswordResponse> enterEmail(
-    EnterEmailRequest enterEmailRequest,
-  ) async {
+      EnterEmailRequest enterEmailRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(enterEmailRequest.toJson());
-    final _options = _setStreamType<ForgetPasswordResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'auth/forgotPassword',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<ForgetPasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'auth/forgotPassword',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ForgetPasswordResponse _value;
     try {
@@ -51,23 +58,28 @@ class _ForgetPasswordApiClient implements ForgetPasswordApiClient {
 
   @override
   Future<VerifyCodeResponse> verifyCode(
-    VerifyCodeRequest verifyCodeRequest,
-  ) async {
+      VerifyCodeRequest verifyCodeRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(verifyCodeRequest.toJson());
-    final _options = _setStreamType<VerifyCodeResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'auth/verifyResetCode',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<VerifyCodeResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'auth/verifyResetCode',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late VerifyCodeResponse _value;
     try {
@@ -81,23 +93,28 @@ class _ForgetPasswordApiClient implements ForgetPasswordApiClient {
 
   @override
   Future<ResetPasswordResponse> resetPassword(
-    ResetPasswordRequest resetPasswordRequest,
-  ) async {
+      ResetPasswordRequest resetPasswordRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(resetPasswordRequest.toJson());
-    final _options = _setStreamType<ResetPasswordResponse>(
-      Options(method: 'PUT', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'auth/resetPassword',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<ResetPasswordResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'auth/resetPassword',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ResetPasswordResponse _value;
     try {
@@ -122,7 +139,10 @@ class _ForgetPasswordApiClient implements ForgetPasswordApiClient {
     return requestOptions;
   }
 
-  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }
@@ -136,5 +156,3 @@ class _ForgetPasswordApiClient implements ForgetPasswordApiClient {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
-
-// dart format on

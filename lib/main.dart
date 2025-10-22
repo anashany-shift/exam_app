@@ -5,15 +5,19 @@ import 'package:exam_app/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/config/di.dart';
+import 'core/config/hive_config.dart';
 import 'core/routes/routes.dart';
 import 'core/theme/app_theme.dart';
+
 
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+
   configureDependencies();
+  await HiveConfig.initialize();
   bool isLogged = await TokenStorage.getRememberMeFlag();
   Bloc.observer = MyBlocObserver();
   runApp(MyApp(isLogged: isLogged));

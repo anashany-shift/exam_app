@@ -7,7 +7,11 @@ part of 'verify_code_request.dart';
 // **************************************************************************
 
 VerifyCodeRequest _$VerifyCodeRequestFromJson(Map<String, dynamic> json) =>
-    VerifyCodeRequest(resetCode: json['resetCode'] as String?);
+    VerifyCodeRequest(
+      resetCode: json['resetCode'] as String?,
+    );
 
 Map<String, dynamic> _$VerifyCodeRequestToJson(VerifyCodeRequest instance) =>
-    <String, dynamic>{'resetCode': instance.resetCode};
+    <String, dynamic>{
+      'resetCode': instance.resetCode,
+    };

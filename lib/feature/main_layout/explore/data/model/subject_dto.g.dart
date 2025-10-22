@@ -7,11 +7,11 @@ part of 'subject_dto.dart';
 // **************************************************************************
 
 SubjectsDto _$SubjectsDtoFromJson(Map<String, dynamic> json) => SubjectsDto(
-  Id: json['_id'] as String?,
-  name: json['name'] as String?,
-  icon: json['icon'] as String?,
-  createdAt: json['createdAt'] as String?,
-);
+      Id: json['_id'] as String?,
+      name: json['name'] as String?,
+      icon: json['icon'] as String?,
+      createdAt: json['createdAt'] as String?,
+    );
 
 Map<String, dynamic> _$SubjectsDtoToJson(SubjectsDto instance) =>
     <String, dynamic>{

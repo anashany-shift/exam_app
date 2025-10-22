@@ -7,9 +7,13 @@ import 'package:exam_app/feature/exam/exam_soccer/view/widgets/score_section.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ExamScoreViewBody extends StatelessWidget {
-  const ExamScoreViewBody({super.key});
+import '../../../domain/entities/question_entity.dart';
 
+class ExamScoreViewBody extends StatelessWidget {
+  const ExamScoreViewBody({super.key, required this.questions, required this.selectedAnswers, required this.examId});
+  final List<QuestionEntity> questions;
+  final Map<String, String> selectedAnswers;
+  final String examId;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,12 +24,20 @@ class ExamScoreViewBody extends StatelessWidget {
           const CustomAppBar(title: "Exam Score"),
           SizedBox(height: 40.h),
           const ScoreSection(),
+
+
+
+
           SizedBox(height: 80.h),
           CustomButton(
             buttonModel: ButtonModel(
               text: "show result",
               onPressed: () {
-                Navigator.pushNamed(context, Routes.answer);
+                final reviewArgs = {
+                  'questions': questions,
+                  'selectedAnswers': selectedAnswers,
+                };
+                Navigator.pushNamed(context, Routes.answer, arguments: reviewArgs);
               },
             ),
           ),

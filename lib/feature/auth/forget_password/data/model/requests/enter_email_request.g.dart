@@ -7,7 +7,11 @@ part of 'enter_email_request.dart';
 // **************************************************************************
 
 EnterEmailRequest _$EnterEmailRequestFromJson(Map<String, dynamic> json) =>
-    EnterEmailRequest(email: json['email'] as String?);
+    EnterEmailRequest(
+      email: json['email'] as String?,
+    );
 
 Map<String, dynamic> _$EnterEmailRequestToJson(EnterEmailRequest instance) =>
-    <String, dynamic>{'email': instance.email};
+    <String, dynamic>{
+      'email': instance.email,
+    };

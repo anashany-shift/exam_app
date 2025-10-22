@@ -41,14 +41,6 @@ class ResetPasswordError extends ForgetPasswordState {
 class ResetPasswordLoading extends ForgetPasswordState {}
 
 
-
-
-
-
-
-
-
-
 class ChangeIndex extends ForgetPasswordState {
  final int index;
 

@@ -14,7 +14,7 @@ class ResultExamInfoSection extends StatelessWidget {
       children: [
         Text("English", style: theme.textTheme.titleSmall),
         SizedBox(height: 24.h),
-        const ResultExamInfoListView()
+
       ],
     );
   }
